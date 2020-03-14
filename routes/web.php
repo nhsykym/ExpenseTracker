@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+})->where('any', '.*');
+
+Route::get('/list', function() {
+    return view('list');
+})->where('any', '.*');
+
+Route::get('/create', function() {
+    return view('create');
 })->where('any', '.*');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');

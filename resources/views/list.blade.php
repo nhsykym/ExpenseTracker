@@ -4,15 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    図
-                </div>
-            </div>
             <div class="card mt-3">
-                <div class="card-header">最近の支出
+                <div class="card-header">収支の一覧
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -43,6 +36,15 @@
                             </tr>
                         </tbody>
                     </table>
+                    <nav aria-label="Page navigation">
+                      <ul class="pagination row justify-content-center">
+                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next<</a></li>
+                      </ul>
+                    </nav>
                 </div>
             <div>
         </div>

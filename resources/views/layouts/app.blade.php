@@ -33,11 +33,19 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link mx-2" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2" href="/list">List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2" href="/create">+ 新規追加</a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

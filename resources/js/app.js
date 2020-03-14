@@ -1,15 +1,47 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes React and other helpers. It's a great starting point while
- * building robust, powerful web applications using React + Laravel.
- */
-
 require('./bootstrap');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+} from 'react-router-dom';
 
-/**
- * Next, we will create a fresh React component instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import Create from './components/Create';
+import List from './components/List';
+import Edit from './components/Edit';
 
-require('./components/Example');
+ReactDOM.render(
+    <Router>
+         <div className="container">
+            <nav className="navbar navbar-default">
+              <div className="container-fluid">
+                <div className="navbar-header">
+                  <a className="navbar-brand" href="/">ToDoList</a>
+                </div>
+                <ul className="nav navbar-nav">
+                  <li className="active"><a href="#">Home</a></li>
+                  <li><Link to="/create">Create</Link></li>
+                  <li><Link to="/list">List</Link></li>
+                </ul>
+              </div>
+            </nav>
+            
+            <Switch>
+                <Route path="/create">
+                    <Create />
+                </Route>
+                <Route path="/list">
+                    <List />
+                </Route>
+                <Route path="/todos/:id/edit">
+                    <Edit />
+                </Route>
+            </Switch>
+        </div>
+    </Router>,
+    
+    document.getElementById('example')
+);
+
