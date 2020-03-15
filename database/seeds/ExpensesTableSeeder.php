@@ -11,15 +11,12 @@ class ExpensesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            
-        
-        ]);
-        
-        
-        
         DB::table('expenses')->insert([
-            
+            'purchased_at' => '2020-03-12',
+            'title' => Str::random(10),
+            'money' => 300,
+            'category_id' => 1,
+            'user_id' => 1,
         ]);
     }
 }

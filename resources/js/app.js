@@ -1,11 +1,24 @@
-require('./bootstrap');
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Home from './components/Home';
+
+import Default from './components/Default';
 // import Create from './components/Create';
 // import List from './components/List';
 // import Edit from './components/Edit';
 
-ReactDOM.render(<Home />, document.getElementById('app'));
+const App = () => {
+    return (
+        <BrowserRouter>
+                <Switch>
+                    {/* <Route exact path="/login" component={Login} /> */}
+                    <Route path="/" component={Default} />
+                </Switch>
+            </BrowserRouter>
+    );
+    
+};
+
+ReactDOM.render(<App />, document.getElementById('app'));
 
