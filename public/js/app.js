@@ -65598,23 +65598,25 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes React and other helpers. It's a great starting point while
- * building robust, powerful web applications using React + Laravel.
- */
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-/**
- * Next, we will create a fresh React component instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 
-__webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js");
+
+ // import Create from './components/Create';
+// import List from './components/List';
+// import Edit from './components/Edit';
+
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Home__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('app'));
 
 /***/ }),
 
@@ -65663,10 +65665,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/Example.js":
-/*!********************************************!*\
-  !*** ./resources/js/components/Example.js ***!
-  \********************************************/
+/***/ "./resources/js/components/Home.js":
+/*!*****************************************!*\
+  !*** ./resources/js/components/Home.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -65677,29 +65679,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 
+ // import Create from './components/Create';
+// import List from './components/List';
+// import Edit from './components/Edit';
 
-
-function Example() {
+var Home = function Home() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container"
+    "class": "container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row justify-content-center"
+    "class": "row justify-content-center"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-8"
+    "class": "col-md-10"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card"
+    "class": "card"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-header"
-  }, "Example Component"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-body"
-  }, "I'm an example component!")))));
-}
+    "class": "card-header"
+  }, "Dashboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    "class": "card-body"
+  }, "\u56F3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    "class": "card mt-3"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    "class": "card-header"
+  }, "\u6700\u8FD1\u306E\u652F\u51FA"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    "class": "card-body"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    "class": "table"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "\u65E5\u4ED8"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "\u30E1\u30E2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "\u91D1\u984D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "\u7DE8\u96C6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "\u524A\u9664")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u30BF\u30B9\u30AF\u304C\u3067\u308B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "300\u5186"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    "class": "btn btn-primary"
+  }, "\u7DE8\u96C6")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    "class": "btn btn-danger"
+  }, "\u524A\u9664"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u30BF\u30B9\u30AF\u304C\u3067\u308B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "300\u5186"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    "class": "btn btn-primary"
+  }, "\u7DE8\u96C6")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    "class": "btn btn-danger"
+  }, "\u524A\u9664"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u30BF\u30B9\u30AF\u304C\u3067\u308B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "300\u5186"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    "class": "btn btn-primary"
+  }, "\u7DE8\u96C6")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    "class": "btn btn-danger"
+  }, "\u524A\u9664"))))))))));
+};
 
-/* harmony default export */ __webpack_exports__["default"] = (Example);
-
-if (document.getElementById('example')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Example, null), document.getElementById('example'));
-}
+/* harmony default export */ __webpack_exports__["default"] = (Home);
 
 /***/ }),
 
