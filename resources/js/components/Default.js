@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Header from './Header';
 import Home from './Home';
@@ -9,16 +9,15 @@ import List from './List';
 
 const Default = () => {
   return (
-    <div>
+    <React.Fragment>
         <Header />
-        <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/create" component={Create} />
-            <Route path="/edit" component={Edit} />
-            <Route path="/list" component={List} />
-            {/* <Route path="/service" component={Service} /> */}
-        </Switch>
-    </div>
+          <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/create" component={Create} />
+              <Route path="/edit/:id" component={Edit} />
+              <Route path="/list" component={List} />
+          </Switch>
+    </React.Fragment>
   );
 };
 

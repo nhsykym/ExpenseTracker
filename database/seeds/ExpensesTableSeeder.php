@@ -18,5 +18,12 @@ class ExpensesTableSeeder extends Seeder
             'category_id' => 1,
             'user_id' => 1,
         ]);
+        DB::table('expenses')->insert([
+            'purchased_at' => '2020-03-13',
+            'title' => Str::random(10),
+            'money' => 200,
+            'category_id' => 1,
+            'user_id' => 1,
+        ]);
     }
 }

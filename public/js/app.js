@@ -34742,6 +34742,9 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -34752,55 +34755,111 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var Create = function Create() {
+
+
+var Create = function Create(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState2 = _slicedToArray(_useState, 2),
-      expense = _useState2[0],
-      setExpense = _useState2[1];
+      purchased_at = _useState2[0],
+      setPurchased_at = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      title = _useState4[0],
+      setTitle = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState6 = _slicedToArray(_useState5, 2),
+      money = _useState6[0],
+      setMoney = _useState6[1];
+
+  var handleInputChange = function handleInputChange(e) {
+    switch (e.target.name) {
+      case 'purchased_at':
+        setPurchased_at(e.target.value);
+        break;
+
+      case 'title':
+        setTitle(e.target.value);
+        break;
+
+      case 'money':
+        setMoney(e.target.value);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  var handleSubmit = function handleSubmit() {
+    if ({
+      purchased_at: purchased_at
+    } == '' && {
+      title: title
+    } == '' && {
+      money: money
+    } == '') {
+      return;
+    }
+
+    var data = {
+      purchased_at: purchased_at,
+      title: title,
+      money: money
+    };
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/add', data).then(function (res) {
+      props.history.push("/list");
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "container"
+    className: "container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "row justify-content-center"
+    className: "row justify-content-center"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "col-md-10"
+    className: "col-md-10"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "card mt-3"
+    className: "card mt-3"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "card-header"
+    className: "card-header"
   }, "\u65B0\u898F\u8FFD\u52A0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "card-body"
+    className: "card-body"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "w-50"
+    className: "w-50"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "form-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "for": "text1"
-  }, "\u65E5\u4ED8:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u65E5\u4ED8:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "date",
+    name: "purchased_at",
+    value: purchased_at,
+    className: "form-control",
+    onChange: handleInputChange
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u30E1\u30E2:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
-    id: "text1",
-    "class": "form-control"
+    name: "title",
+    value: title,
+    className: "form-control",
+    onChange: handleInputChange
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "form-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "for": "passwd1"
-  }, "\u30E1\u30E2:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "password",
-    id: "passwd1",
-    "class": "form-control"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "form-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "for": "textarea1"
-  }, "\u91D1\u984D:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    id: "textarea1",
-    "class": "form-control"
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u91D1\u984D:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    name: "money",
+    value: money,
+    className: "form-control",
+    onChange: handleInputChange
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    "class": "btn btn-primary"
+    className: "btn btn-primary",
+    onClick: handleSubmit
   }, "\u8FFD\u52A0"))))))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Create);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Create));
 
 /***/ }),
 
