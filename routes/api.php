@@ -20,5 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'api'], function(){
     Route::get('get', 'ExpenseController@getExpenses');
-    Route::post('add', 'ExpenseController@addExpenses');
+    Route::post('add', 'ExpenseController@addExpense');
+    Route::get('edit/{expense_id}', 'ExpenseController@showExpense');
+    Route::patch('edit/{expense_id}', 'ExpenseController@editExpense');
+    Route::post('delete', 'ExpenseController@deleteExpense');
 });
