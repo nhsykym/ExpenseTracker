@@ -73773,10 +73773,10 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
-/***/ "./resources/js/components/Chart.js":
-/*!******************************************!*\
-  !*** ./resources/js/components/Chart.js ***!
-  \******************************************/
+/***/ "./resources/js/components/BarChart.js":
+/*!*********************************************!*\
+  !*** ./resources/js/components/BarChart.js ***!
+  \*********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -73785,40 +73785,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-var data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [{
-    label: 'My First dataset',
-    fill: true,
-    lineTension: 0.1,
-    backgroundColor: 'rgba(75,192,192,0.4)',
-    borderColor: 'rgba(75,192,192,1)',
-    borderCapStyle: 'round',
-    borderDash: [],
-    borderDashOffset: 0.0,
-    borderJoinStyle: 'square',
-    pointBorderColor: 'rgba(75,192,192,1)',
-    pointBackgroundColor: '#eee',
-    pointBorderWidth: 10,
-    pointHoverRadius: 5,
-    pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-    pointHoverBorderColor: 'rgba(220,220,220,1)',
-    pointHoverBorderWidth: 1,
-    pointRadius: 1,
-    pointHitRadius: 10,
-    data: [3, 10, 21, 31, 34, 40, 48]
-  }]
-};
 
-var LineChart = function LineChart() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Line Example"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_1__["Line"], {
-    data: data
+
+
+var BarChart = function BarChart() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      chartData = _useState2[0],
+      setChartData = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    getChartData();
+  }, []);
+
+  var getChartData = function getChartData() {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/getChartData").then(function (res) {
+      var expenses = res.data;
+      var labels = [];
+      var data = [];
+      expenses.forEach(function (expense) {
+        labels.push(expense.purchased_at);
+        data.push(expense.money);
+      });
+      console.log(expenses);
+      setChartData({
+        labels: labels,
+        datasets: [{
+          label: "金額",
+          data: data,
+          backgroundColor: ["rgba(255, 99, 132, 0.6)", "rgba(54, 162, 235, 0.6)", "rgba(255, 99, 132, 0.6)"]
+        }]
+      });
+    });
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "\u652F\u51FA\u306E\u63A8\u79FB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_1__["Bar"], {
+    data: chartData,
+    height: 100
   }));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (LineChart);
+/* harmony default export */ __webpack_exports__["default"] = (BarChart);
 
 /***/ }),
 
@@ -74218,7 +74236,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Table */ "./resources/js/components/Table.js");
-/* harmony import */ var _Chart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Chart */ "./resources/js/components/Chart.js");
+/* harmony import */ var _BarChart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./BarChart */ "./resources/js/components/BarChart.js");
 
 
 
@@ -74230,14 +74248,18 @@ var Home = function Home() {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row justify-content-center"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-10"
+    className: "col-md-12"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card mt-3"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-header"
   }, "Dashboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Chart__WEBPACK_IMPORTED_MODULE_3__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "card-body d-flex"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-50"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BarChart__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-50"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BarChart__WEBPACK_IMPORTED_MODULE_3__["default"], null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
     header: "\u6700\u8FD1\u306E\u53CE\u652F",
     limit: "5"
   }))));
