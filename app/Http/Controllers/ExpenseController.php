@@ -9,22 +9,46 @@ class ExpenseController extends Controller
 {
     public function getExpenses()
     {
-        $expenses = Expense::all();
+        $expenses = Expense::orderBy('purchased_at', 'DESC')->get();
         return $expenses;
     }
     
-    public function addExpenses(Request $request)
+    public function addExpense(Request $request)
     {
         $expense = new Expense;
         $expense->purchased_at = $request->purchased_at;
         $expense->title = $request->title;
         $expense->money = $request->money;
-        $expense->category_id = $request->category_id;
-        $expense->user_id = $request->user_id;
+        $expense->category_id = 1;
+        $expense->user_id = 1;
         $expense->save();
+        return;
+    }
+    
+    public function showExpense($expense_id)
+    {
+        $expense = Expense::find($expense_id);
+        return $expense;
+    }
+    
+    public function editExpense(Request $request, $expense_id)
+    {
+        $expense = Expense::find($expense_id);
+        $expense->purchased_at = $request->purchased_at;
+        $expense->title = $request->title;
+        $expense->money = $request->money;
+        $expense->category_id = 1;
+        $expense->user_id = 1;
+        $expense->save();
+        return;
+    }
+    
+    public function deleteExpense(Request $request)
+    {
+        $expense = Expense::find($request->id);
+        $expense->delete();
         
         $expenses = Expense::all();
         return $expenses;
-        
     }
 }
