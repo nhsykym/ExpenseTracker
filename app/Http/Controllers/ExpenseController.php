@@ -14,6 +14,13 @@ class ExpenseController extends Controller
         return $expenses;
     }
     
+    public function getChartData()
+    {
+        // $expenses = Expense::groupBy('purchased_at')->orderBy('purchased_at', 'ASC')->get();
+        $expenses = Expense::get();
+        return $expenses;
+    }
+    
     public function addExpense(Request $request)
     {
         $expense = new Expense;
