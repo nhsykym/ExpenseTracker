@@ -1,19 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 //RenderRowsの機能実装
 const RenderRows = (props) => {
+    const handleDelete = (e) => {
+        axios
+            .post('/api/delete', {
+                id: e.target.name
+            })
+            .then(res => {
+                props.updateList(res);
+                console.log('deleted');
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
     // mapでループしている（for相当）
     return props.expenses.map(expense => {
         return (
             <tr key={expense.id}>
-                <td>{expense.id}</td>
+                <td>{expense.purchased_at}</td>
                 <td>{expense.title}</td>
                 <td>{expense.money}</td>
-                <td><button className="btn btn-primary"><Link style={styles.Link} to="/edit">編集</Link></button></td>
-                <td><button className="btn btn-danger">削除</button></td>
+                <td><button className="btn btn-primary"><Link style={styles.Link} to={'/edit/' + expense.id}>編集</Link></button></td>
+                <td><button className="btn btn-danger" name={expense.id} onClick={handleDelete}>削除</button></td>
             </tr>
-            
         );
     });
 };
@@ -25,4 +38,4 @@ const styles = {
 };
 
 
-export default RenderRows;
+export default withRouter(RenderRows);

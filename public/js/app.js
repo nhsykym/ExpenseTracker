@@ -34830,7 +34830,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Default = function Default() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/",
     component: _Home__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -34838,7 +34838,7 @@ var Default = function Default() {
     path: "/create",
     component: _Create__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/edit",
+    path: "/edit/:id",
     component: _Edit__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/list",
@@ -34861,9 +34861,90 @@ var Default = function Default() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-var Edit = function Edit() {
+
+
+
+var Edit = function Edit(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      purchased_at = _useState2[0],
+      setPurchased_at = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      title = _useState4[0],
+      setTitle = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      money = _useState6[0],
+      setMoney = _useState6[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/edit/' + props.match.params.id).then(function (res) {
+      //expensesを更新（描画がかかる）
+      setPurchased_at(res.data.purchased_at);
+      setTitle(res.data.title);
+      setMoney(res.data.money);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }, []);
+
+  var handleInputChange = function handleInputChange(e) {
+    switch (e.target.name) {
+      case 'purchased_at':
+        setPurchased_at(e.target.value);
+        break;
+
+      case 'title':
+        setTitle(e.target.value);
+        break;
+
+      case 'money':
+        setMoney(e.target.value);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  var handleSubmit = function handleSubmit() {
+    if ({
+      purchased_at: purchased_at
+    } == '' && {
+      title: title
+    } == '' && {
+      money: money
+    } == '') {
+      return;
+    }
+
+    var data = {
+      purchased_at: purchased_at,
+      title: title,
+      money: money
+    };
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.patch('/api/edit/' + props.match.params.id, data).then(function (res) {
+      props.history.push("/list");
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -34880,33 +34961,35 @@ var Edit = function Edit() {
     className: "w-50"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "for": "text1"
-  }, "\u65E5\u4ED8:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u65E5\u4ED8:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "date",
+    name: "purchased_at",
+    value: purchased_at,
+    className: "form-control",
+    onChange: handleInputChange
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u30E1\u30E2:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
-    id: "text1",
-    className: "form-control"
+    name: "title",
+    value: title,
+    className: "form-control",
+    onChange: handleInputChange
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "for": "passwd1"
-  }, "\u30E1\u30E2:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "password",
-    id: "passwd1",
-    className: "form-control"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "form-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "for": "textarea1"
-  }, "\u91D1\u984D:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    id: "textarea1",
-    className: "form-control"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u91D1\u984D:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    name: "money",
+    value: money,
+    className: "form-control",
+    onChange: handleInputChange
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-primary"
+    className: "btn btn-primary",
+    onClick: handleSubmit
   }, "\u66F4\u65B0"))))))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Edit);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Edit));
 
 /***/ }),
 
@@ -35055,100 +35138,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RenderRows__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RenderRows */ "./resources/js/components/RenderRows.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-// import React, { useState, useEffect } from 'react';
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
- // const List = () => {
-//     const [expenses, setExpenses] = useState([]);
-//     useEffect(() => {
-//         console.log('mounted');
-//         axios
-//             .get('/api/get')
-//             .then((res) => {
-//                 //expensesを更新（描画がかかる）
-//                 setExpenses(res.data);
-//                 console.log(res.data);
-//                 })
-//             .catch(error => {
-//                 console.log(error);
-//             });
-//     });
 
-var List = /*#__PURE__*/function (_Component) {
-  _inherits(List, _Component);
 
-  function List(props) {
-    var _this;
 
-    _classCallCheck(this, List);
+var List = function List() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      expenses = _useState2[0],
+      setExpenses = _useState2[1];
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(List).call(this, props));
-    _this.state = {
-      expenses: []
-    };
-    return _this;
-  }
+  var updateList = function updateList(res) {
+    setExpenses(res.data);
+  };
 
-  _createClass(List, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      console.log('mounted');
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get').then(function (res) {
-        //expensesを更新（描画がかかる）
-        _this2.setState({
-          expenses: res.data
-        });
-
-        console.log(res.data);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-10"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card mt-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-header"
-      }, "\u53CE\u652F\u306E\u4E00\u89A7"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-        className: "table"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u65E5\u4ED8"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u30E1\u30E2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u91D1\u984D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u7DE8\u96C6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u524A\u9664"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RenderRows__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        expenses: this.state.expenses
-      }))))))));
-    }
-  }]);
-
-  return List;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get').then(function (res) {
+      //expensesを更新（描画がかかる）
+      setExpenses(res.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }, []);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row justify-content-center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-10"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card mt-3"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-header"
+  }, "\u53CE\u652F\u306E\u4E00\u89A7"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u65E5\u4ED8"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u30E1\u30E2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u91D1\u984D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u7DE8\u96C6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u524A\u9664"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RenderRows__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    expenses: expenses,
+    updateList: updateList
+  }))))))));
+};
 
 /* harmony default export */ __webpack_exports__["default"] = (List);
 
@@ -35166,21 +35204,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+
 
  //RenderRowsの機能実装
 
 var RenderRows = function RenderRows(props) {
-  // mapでループしている（for相当）
+  var handleDelete = function handleDelete(e) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/delete', {
+      id: e.target.name
+    }).then(function (res) {
+      props.updateList(res);
+      console.log('deleted');
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }; // mapでループしている（for相当）
+
+
   return props.expenses.map(function (expense) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
       key: expense.id
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, expense.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, expense.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, expense.money), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, expense.purchased_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, expense.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, expense.money), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "btn btn-primary"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       style: styles.Link,
-      to: "/edit"
+      to: '/edit/' + expense.id
     }, "\u7DE8\u96C6"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "btn btn-danger"
+      className: "btn btn-danger",
+      name: expense.id,
+      onClick: handleDelete
     }, "\u524A\u9664")));
   });
 };
@@ -35190,7 +35244,7 @@ var styles = {
     color: "#fff"
   }
 };
-/* harmony default export */ __webpack_exports__["default"] = (RenderRows);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(RenderRows));
 
 /***/ }),
 
