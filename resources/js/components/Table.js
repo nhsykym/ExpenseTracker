@@ -11,10 +11,9 @@ const Table = (props) => {
     };
         
     useEffect(() => {
-        const limit = props.limit;
-        console.log(limit);
+        const limit = {limit: props.limit};
         axios
-            .get('/api/get', {limit: limit})
+            .get('/api/get/', {params: limit})
             .then((res) => {
                 //expensesを更新（描画がかかる）
                 setExpenses(res.data);

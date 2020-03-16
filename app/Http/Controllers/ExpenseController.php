@@ -9,8 +9,8 @@ class ExpenseController extends Controller
 {
     public function getExpenses(Request $request)
     {
-        $limit = $request->limit;
-        $expenses = Expense::orderBy('purchased_at', 'DESC')->take(5)->get();
+        $limit = $request->input('limit');
+        $expenses = Expense::orderBy('purchased_at', 'DESC')->take($limit)->get();
         return $expenses;
     }
     

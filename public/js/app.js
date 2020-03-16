@@ -34768,7 +34768,7 @@ var Create = function Create(props) {
       title = _useState4[0],
       setTitle = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState6 = _slicedToArray(_useState5, 2),
       money = _useState6[0],
       setMoney = _useState6[1];
@@ -35283,10 +35283,11 @@ var Table = function Table(props) {
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var limit = props.limit;
-    console.log(limit);
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get', {
-      limit: limit
+    var limit = {
+      limit: props.limit
+    };
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get/', {
+      params: limit
     }).then(function (res) {
       //expensesを更新（描画がかかる）
       setExpenses(res.data);
