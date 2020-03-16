@@ -7,9 +7,10 @@ use App\Expense;
 
 class ExpenseController extends Controller
 {
-    public function getExpenses()
+    public function getExpenses(Request $request)
     {
-        $expenses = Expense::orderBy('purchased_at', 'DESC')->get();
+        $limit = $request->limit;
+        $expenses = Expense::orderBy('purchased_at', 'DESC')->take(5)->get();
         return $expenses;
     }
     

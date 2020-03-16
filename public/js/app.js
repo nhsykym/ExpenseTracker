@@ -35126,10 +35126,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Table */ "./resources/js/components/Table.js");
 
 
 
-var Default = function Default() {
+
+var Home = function Home() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -35142,44 +35144,13 @@ var Default = function Default() {
     className: "card-header"
   }, "Dashboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card-body"
-  }, "\u56F3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card mt-3"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-header"
-  }, "\u6700\u8FD1\u306E\u652F\u51FA"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-    className: "table"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u65E5\u4ED8"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u30E1\u30E2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u91D1\u984D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u7DE8\u96C6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u524A\u9664"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u30BF\u30B9\u30AF\u304C\u3067\u308B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "300\u5186"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-primary"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    style: styles.Link,
-    to: "/edit"
-  }, "\u7DE8\u96C6"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-danger"
-  }, "\u524A\u9664"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u30BF\u30B9\u30AF\u304C\u3067\u308B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "300\u5186"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-primary"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    style: styles.Link,
-    to: "/edit"
-  }, "\u7DE8\u96C6"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-danger"
-  }, "\u524A\u9664"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u30BF\u30B9\u30AF\u304C\u3067\u308B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "300\u5186"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-primary"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    style: styles.Link,
-    to: "/edit"
-  }, "\u7DE8\u96C6"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-danger"
-  }, "\u524A\u9664"))))))))));
+  }, "\u56F3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    header: "\u6700\u8FD1\u306E\u53CE\u652F",
+    limit: "5"
+  }))));
 };
 
-var styles = {
-  Link: {
-    color: "#fff"
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = (Default);
+/* harmony default export */ __webpack_exports__["default"] = (Home);
 
 /***/ }),
 
@@ -35197,54 +35168,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RenderRows__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RenderRows */ "./resources/js/components/RenderRows.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+/* harmony import */ var _Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Table */ "./resources/js/components/Table.js");
 
 
 
 
 
 var List = function List() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
-      _useState2 = _slicedToArray(_useState, 2),
-      expenses = _useState2[0],
-      setExpenses = _useState2[1];
-
-  var updateList = function updateList(res) {
-    setExpenses(res.data);
-  };
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get').then(function (res) {
-      //expensesを更新（描画がかかる）
-      setExpenses(res.data);
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row justify-content-center"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-md-10"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card mt-3"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-header"
-  }, "\u53CE\u652F\u306E\u4E00\u89A7"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-body"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-    className: "table"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u65E5\u4ED8"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u30E1\u30E2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u91D1\u984D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u7DE8\u96C6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u524A\u9664"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RenderRows__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    expenses: expenses,
-    updateList: updateList
-  }))))))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    header: "\u53CE\u652F\u306E\u4E00\u89A7"
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (List);
@@ -35304,6 +35243,72 @@ var styles = {
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(RenderRows));
+
+/***/ }),
+
+/***/ "./resources/js/components/Table.js":
+/*!******************************************!*\
+  !*** ./resources/js/components/Table.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _RenderRows__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RenderRows */ "./resources/js/components/RenderRows.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+var Table = function Table(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      expenses = _useState2[0],
+      setExpenses = _useState2[1];
+
+  var updateTable = function updateTable(res) {
+    setExpenses(res.data);
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    var limit = props.limit;
+    console.log(limit);
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get', {
+      limit: limit
+    }).then(function (res) {
+      //expensesを更新（描画がかかる）
+      setExpenses(res.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }, []);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card mt-3"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-header"
+  }, props.header), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u65E5\u4ED8"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u30E1\u30E2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u91D1\u984D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u7DE8\u96C6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "\u524A\u9664"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RenderRows__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    expenses: expenses,
+    updateTable: updateTable
+  })))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Table);
 
 /***/ }),
 
