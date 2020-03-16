@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Table from './Table';
+import Chart from './Chart';
+
 
 const Home = () => {
   return (
@@ -10,7 +12,7 @@ const Home = () => {
                     <div className="card mt-3">
                         <div className="card-header">Dashboard</div>
                         <div className="card-body">
-                            図
+                            <Chart />
                         </div>
                     </div>
                     <Table header="最近の収支" limit="5"/>
