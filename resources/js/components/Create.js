@@ -6,7 +6,7 @@ import axios from 'axios';
 const Create = (props) => {
   const [purchased_at, setPurchased_at] = useState('');
   const [title, setTitle] = useState('');
-  const [money, setMoney] = useState(0);
+  const [money, setMoney] = useState('');
   
   const handleInputChange = (e) => {
     switch(e.target.name) {
