@@ -74172,9 +74172,37 @@ var Edit = function Edit(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 var Filter = function Filter() {
+  //年月をyyyy-mm形式で取得
+  var getThisMonth = function getThisMonth() {
+    var now = new Date();
+    var thisYear = now.getFullYear();
+    var thisMonth = ("0" + (now.getMonth() + 1)).slice(-2);
+    return thisYear + "-" + thisMonth;
+  };
+
+  console.log(getThisMonth());
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getThisMonth()),
+      _useState2 = _slicedToArray(_useState, 2),
+      yearMonth = _useState2[0],
+      setYearMonth = _useState2[1];
+
+  var handleMonthChange = function handleMonthChange(event) {
+    var inputMonth = event.target.value;
+    setYearMonth(inputMonth);
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card mt-3"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74184,25 +74212,23 @@ var Filter = function Filter() {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "form-inline"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "form-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "for": "purchased_at"
-  }, "\u65E5\u4ED8:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u65E5\u4ED8:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "mx-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "date",
+    type: "month",
     id: "purchased_at",
-    "class": "form-control"
+    value: yearMonth,
+    onChange: handleMonthChange,
+    className: "form-control"
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     "class": "form-group"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "for": "category"
-  }, "\u30AB\u30C6\u30B4\u30EA: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u30AB\u30C6\u30B4\u30EA: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "mx-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
     id: "category",
-    "class": "form-control"
+    className: "form-control"
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn btn-primary"
