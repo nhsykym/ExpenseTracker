@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Expense;
+use Log;
+use DB;
 
 class ExpenseController extends Controller
 {
@@ -16,8 +18,11 @@ class ExpenseController extends Controller
     
     public function getChartData()
     {
-        // $expenses = Expense::groupBy('purchased_at')->orderBy('purchased_at', 'ASC')->get();
-        $expenses = Expense::get();
+        $expenses = DB::table('expenses')
+            ->selectRaw('purchased_at, sum(money) as money')
+            ->groupBy('purchased_at')
+            ->get();
+        Log::debug('$expenses="' .$expenses. '"');
         return $expenses;
     }
     
