@@ -12,7 +12,10 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'name' => 'test',
+            'name' => 'Book'
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Vegitable'
         ]);
     }
 }
