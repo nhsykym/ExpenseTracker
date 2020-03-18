@@ -74185,7 +74185,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var Filter = function Filter() {
+var Filter = function Filter(props) {
   //年月をyyyy-mm形式で取得
   var getThisMonth = function getThisMonth() {
     var now = new Date();
@@ -74244,6 +74244,22 @@ var Filter = function Filter() {
     setMoneyTo(event.target.value);
   };
 
+  var handleSubmit = function handleSubmit() {
+    var data = {
+      yearMonth: yearMonth,
+      category: selectedCategory,
+      moneyFrom: moneyFrom,
+      moneyTo: moneyTo
+    };
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/getFiltered', {
+      params: data
+    }).then(function (res) {
+      props.updateTable(res.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "card mt-3"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74288,7 +74304,8 @@ var Filter = function Filter() {
     className: "form-control form-inline"
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
-    className: "btn btn-primary"
+    className: "btn btn-primary",
+    onClick: handleSubmit
   }, "\u7D5E\u308A\u8FBC\u307F")));
 };
 
@@ -74469,8 +74486,8 @@ var List = function List() {
       expenses = _useState2[0],
       setExpenses = _useState2[1];
 
-  var updateTable = function updateTable(res) {
-    setExpenses(res.data);
+  var updateTable = function updateTable(result) {
+    setExpenses(result);
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
@@ -74487,7 +74504,9 @@ var List = function List() {
     className: "row justify-content-center"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-md-10"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Filter__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Filter__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    updateTable: updateTable
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_3__["default"], {
     header: "\u53CE\u652F\u306E\u4E00\u89A7",
     expenses: expenses,
     updateTable: updateTable

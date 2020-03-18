@@ -7,8 +7,8 @@ import Filter from './Filter';
 const List = () => {
     const [expenses, setExpenses] = useState([]);
 
-    const updateTable = (res) => {
-        setExpenses(res.data);
+    const updateTable = (result) => {
+        setExpenses(result);
     };
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const List = () => {
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-10">
-                    <Filter />
+                    <Filter updateTable={updateTable}/>
                     <Table header="収支の一覧" expenses={expenses} updateTable={updateTable}/>
                 </div>
             </div>

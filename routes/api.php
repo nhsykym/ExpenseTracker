@@ -22,6 +22,7 @@ Route::group(['middleware' => 'api'], function(){
     Route::get('get', 'ExpenseController@getExpenses');
     Route::get('getChartData', 'ExpenseController@getChartData');
     Route::get('categories', 'ExpenseController@getCategories');
+    Route::get('getFiltered', 'ExpenseController@getFiltered');
     Route::post('add', 'ExpenseController@addExpense');
     Route::get('edit/{expense_id}', 'ExpenseController@showExpense');
     Route::patch('edit/{expense_id}', 'ExpenseController@editExpense');

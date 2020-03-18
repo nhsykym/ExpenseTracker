@@ -13,7 +13,7 @@ class ExpenseController extends Controller
     {
         // $limit = $request->input('limit');
         $expenses = Expense::orderBy('purchased_at', 'DESC')->get();
-        Log::debug($expenses);
+        // Log::debug($expenses);
         return $expenses;
     }
     
@@ -32,6 +32,38 @@ class ExpenseController extends Controller
         $categories = Expense::groupBy('category_id')->pluck('category_id');
         // Log::debug($categories);
         return $categories;
+    }
+    
+    public function getFiltered(Request $request) {
+        $query = Expense::query();
+        $yearMonth = $request->yearMonth;
+        $category = $request->category;
+        $moneyFrom = $request->moneyFrom;
+        $moneyTo = $request->moneyTo;
+        
+        Log::debug($request->category);
+        
+        if(isset($yearMonth)) {
+            $query->where('purchased_at', 'like', '%' . $yearMonth);
+        }
+        
+        if(isset($category)) {
+            $query->where('category_id', 1);
+        }
+        
+        if(isset($moneyFrom)) {
+            $query->where('money', '>=', $moneyFrom);
+        }
+        
+        if(isset($moneyTo)) {
+            $query->where('money', '<=', $moneyTo);
+        }
+        
+        $expenses = $query->get();
+        $queryStr = $query->toSql();
+        Log::debug('Filtered result: ' . $expenses);
+        Log::debug('SQL: ' . $queryStr);
+        return $expenses;
     }
     
     public function addExpense(Request $request)
