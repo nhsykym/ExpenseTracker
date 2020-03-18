@@ -1,4 +1,5 @@
 import React, { useState }from 'react';
+import RenderOptions from './RenderOptions';
 
 const Filter = () => {
   
@@ -10,15 +11,19 @@ const Filter = () => {
     return thisYear + "-" + thisMonth;
   };
   
-  console.log(getThisMonth());
-  
   const [yearMonth, setYearMonth] = useState(getThisMonth());
+  const [categories, setCategories] = useState(['CategoryA', 'CategoryB', 'CategoryC', 'CategoryD', 'CategoryE']);
+  const [selectedCategory, setSelectedCategory] = useState('選択してください');
   
   const handleMonthChange = (event) => {
     const inputMonth = event.target.value;
     setYearMonth(inputMonth);
   };
   
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+ 
   return (
       <div className="card mt-3">
           <div className="card-header">フィルター
@@ -31,10 +36,12 @@ const Filter = () => {
                   <input type="month" id="purchased_at" value={yearMonth} onChange={handleMonthChange} className="form-control" />
                 </div>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label>カテゴリ: </label>
                 <div className="mx-2">
-                  <input type="text" id="category" className="form-control" />
+                  <select className="form-control" valule={selectedCategory} onChange={handleCategoryChange}>
+                    <RenderOptions categories={categories}/>
+                  </select>
                 </div>
               </div>
             </form>

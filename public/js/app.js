@@ -73758,9 +73758,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import Create from './components/Create';
-// import List from './components/List';
-// import Edit from './components/Edit';
+
 
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
@@ -74172,6 +74170,7 @@ var Edit = function Edit(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _RenderOptions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RenderOptions */ "./resources/js/components/RenderOptions.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -74179,6 +74178,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -74191,16 +74191,28 @@ var Filter = function Filter() {
     return thisYear + "-" + thisMonth;
   };
 
-  console.log(getThisMonth());
-
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getThisMonth()),
       _useState2 = _slicedToArray(_useState, 2),
       yearMonth = _useState2[0],
       setYearMonth = _useState2[1];
 
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(['CategoryA', 'CategoryB', 'CategoryC', 'CategoryD', 'CategoryE']),
+      _useState4 = _slicedToArray(_useState3, 2),
+      categories = _useState4[0],
+      setCategories = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('選択してください'),
+      _useState6 = _slicedToArray(_useState5, 2),
+      selectedCategory = _useState6[0],
+      setSelectedCategory = _useState6[1];
+
   var handleMonthChange = function handleMonthChange(event) {
     var inputMonth = event.target.value;
     setYearMonth(inputMonth);
+  };
+
+  var handleCategoryChange = function handleCategoryChange(event) {
+    setSelectedCategory(event.target.value);
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74222,14 +74234,16 @@ var Filter = function Filter() {
     onChange: handleMonthChange,
     className: "form-control"
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "form-group"
+    className: "form-group"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u30AB\u30C6\u30B4\u30EA: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "mx-2"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "text",
-    id: "category",
-    className: "form-control"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    className: "form-control",
+    valule: selectedCategory,
+    onChange: handleCategoryChange
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RenderOptions__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    categories: categories
+  }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn btn-primary"
   }, "\u7D5E\u308A\u8FBC\u307F")));
@@ -74382,6 +74396,32 @@ var List = function List() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (List);
+
+/***/ }),
+
+/***/ "./resources/js/components/RenderOptions.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/RenderOptions.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var RenderOptions = function RenderOptions(props) {
+  return props.categories.map(function (category, index) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      key: index,
+      value: category
+    }, category);
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (RenderOptions);
 
 /***/ }),
 
