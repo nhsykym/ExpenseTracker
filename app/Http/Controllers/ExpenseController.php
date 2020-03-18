@@ -11,8 +11,9 @@ class ExpenseController extends Controller
 {
     public function getExpenses(Request $request)
     {
-        $limit = $request->input('limit');
-        $expenses = Expense::orderBy('purchased_at', 'DESC')->take($limit)->get();
+        // $limit = $request->input('limit');
+        $expenses = Expense::orderBy('purchased_at', 'DESC')->get();
+        Log::debug($expenses);
         return $expenses;
     }
     
@@ -22,14 +23,14 @@ class ExpenseController extends Controller
             ->selectRaw('purchased_at, sum(money) as money')
             ->groupBy('purchased_at')
             ->get();
-        Log::debug('$expenses="' .$expenses. '"');
+        // Log::debug('$expenses="' .$expenses. '"');
         return $expenses;
     }
     
     public function getCategories()
     {
         $categories = Expense::groupBy('category_id')->pluck('category_id');
-        Log::debug($categories);
+        // Log::debug($categories);
         return $categories;
     }
     
