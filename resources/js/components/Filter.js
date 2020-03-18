@@ -55,6 +55,14 @@ const Filter = () => {
                   </select>
                 </div>
               </div>
+              <div className="form-group">
+                <label>金額:</label>
+                <div className="mx-2">
+                  <input type="text" className="form-control form-inline" />
+                  ~
+                  <input type="text" className="form-control form-inline" />
+                </div>
+              </div>
             </form>
             <button type="button" className="btn btn-primary">絞り込み</button>
           </div>

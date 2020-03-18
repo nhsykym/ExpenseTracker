@@ -74254,7 +74254,17 @@ var Filter = function Filter() {
     onChange: handleCategoryChange
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RenderOptions__WEBPACK_IMPORTED_MODULE_1__["default"], {
     categories: categories
-  }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u91D1\u984D:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mx-2"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    className: "form-control form-inline"
+  }), "~", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    className: "form-control form-inline"
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn btn-primary"
   }, "\u7D5E\u308A\u8FBC\u307F")));
