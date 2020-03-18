@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 
-//RenderRowsの機能実装
 const RenderRows = (props) => {
     const handleDelete = (e) => {
         axios
@@ -10,14 +9,14 @@ const RenderRows = (props) => {
                 id: e.target.name
             })
             .then(res => {
-                props.updateList(res);
+                props.updateTable(res.data);
                 console.log('deleted');
             })
             .catch(error => {
                 console.log(error);
             });
     };
-    // mapでループしている（for相当）
+
     return props.expenses.map(expense => {
         return (
             <tr key={expense.id}>
