@@ -22,8 +22,8 @@ class ExpensesTableSeeder extends Seeder
             'purchased_at' => '2020-03-13',
             'title' => Str::random(10),
             'money' => 200,
-            'category_id' => 1,
-            'user_id' => 1,
+            'category_id' => 2,
+            'user_id' => 2,
         ]);
     }
 }

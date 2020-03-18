@@ -19,9 +19,9 @@ class CreateExpensesTable extends Migration
             $table->string('title');
             $table->integer('money');
             $table->unsignedInteger('category_id');
-            // $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->unsignedBiginteger('user_id');
-            // $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
