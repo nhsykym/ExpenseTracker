@@ -1,8 +1,8 @@
-import React, { useState }from 'react';
+import React, { useState, useEffect }from 'react';
 import RenderOptions from './RenderOptions';
+import axios from 'axios';
 
 const Filter = () => {
-  
   //年月をyyyy-mm形式で取得
   const getThisMonth = () => {
     const now = new Date();
@@ -12,8 +12,19 @@ const Filter = () => {
   };
   
   const [yearMonth, setYearMonth] = useState(getThisMonth());
-  const [categories, setCategories] = useState(['CategoryA', 'CategoryB', 'CategoryC', 'CategoryD', 'CategoryE']);
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('選択してください');
+  
+  useEffect(() => {
+    axios
+      .get("/api/categories")
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
   
   const handleMonthChange = (event) => {
     const inputMonth = event.target.value;

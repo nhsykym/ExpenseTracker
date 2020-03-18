@@ -26,6 +26,13 @@ class ExpenseController extends Controller
         return $expenses;
     }
     
+    public function getCategories()
+    {
+        $categories = Expense::groupBy('category_id')->pluck('category_id');
+        Log::debug($categories);
+        return $categories;
+    }
+    
     public function addExpense(Request $request)
     {
         $expense = new Expense;
