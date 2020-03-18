@@ -13,7 +13,9 @@ const Filter = () => {
   
   const [yearMonth, setYearMonth] = useState(getThisMonth());
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('選択してください');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [moneyFrom, setMoneyFrom] = useState('');
+  const [moneyTo, setMoneyTo] = useState('');
   
   useEffect(() => {
     axios
@@ -33,6 +35,14 @@ const Filter = () => {
   
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
+  };
+  
+  const handleMoneyFromChange = (event) => {
+    setMoneyFrom(event.target.value);
+  };
+  
+  const handleMoneyToChange = (event) => {
+    setMoneyTo(event.target.value);
   };
  
   return (
@@ -58,9 +68,9 @@ const Filter = () => {
               <div className="form-group">
                 <label>金額:</label>
                 <div className="mx-2">
-                  <input type="text" className="form-control form-inline" />
+                  <input type="text" value={moneyFrom} onChange={handleMoneyFromChange} className="form-control form-inline" />
                   ~
-                  <input type="text" className="form-control form-inline" />
+                  <input type="text" value={moneyTo} onChange={handleMoneyToChange} className="form-control form-inline" />
                 </div>
               </div>
             </form>

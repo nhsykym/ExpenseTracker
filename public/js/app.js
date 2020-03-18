@@ -74204,10 +74204,20 @@ var Filter = function Filter() {
       categories = _useState4[0],
       setCategories = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('選択してください'),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState6 = _slicedToArray(_useState5, 2),
       selectedCategory = _useState6[0],
       setSelectedCategory = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      moneyFrom = _useState8[0],
+      setMoneyFrom = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      moneyTo = _useState10[0],
+      setMoneyTo = _useState10[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/categories").then(function (res) {
@@ -74224,6 +74234,14 @@ var Filter = function Filter() {
 
   var handleCategoryChange = function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
+  };
+
+  var handleMoneyFromChange = function handleMoneyFromChange(event) {
+    setMoneyFrom(event.target.value);
+  };
+
+  var handleMoneyToChange = function handleMoneyToChange(event) {
+    setMoneyTo(event.target.value);
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74260,9 +74278,13 @@ var Filter = function Filter() {
     className: "mx-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
+    value: moneyFrom,
+    onChange: handleMoneyFromChange,
     className: "form-control form-inline"
   }), "~", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
+    value: moneyTo,
+    onChange: handleMoneyToChange,
     className: "form-control form-inline"
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
