@@ -73758,9 +73758,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import Create from './components/Create';
-// import List from './components/List';
-// import Edit from './components/Edit';
+
 
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
@@ -74161,6 +74159,143 @@ var Edit = function Edit(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Filter.js":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Filter.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _RenderOptions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RenderOptions */ "./resources/js/components/RenderOptions.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+var Filter = function Filter() {
+  //年月をyyyy-mm形式で取得
+  var getThisMonth = function getThisMonth() {
+    var now = new Date();
+    var thisYear = now.getFullYear();
+    var thisMonth = ("0" + (now.getMonth() + 1)).slice(-2);
+    return thisYear + "-" + thisMonth;
+  };
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getThisMonth()),
+      _useState2 = _slicedToArray(_useState, 2),
+      yearMonth = _useState2[0],
+      setYearMonth = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      categories = _useState4[0],
+      setCategories = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      selectedCategory = _useState6[0],
+      setSelectedCategory = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      moneyFrom = _useState8[0],
+      setMoneyFrom = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      moneyTo = _useState10[0],
+      setMoneyTo = _useState10[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/categories").then(function (res) {
+      setCategories(res.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }, []);
+
+  var handleMonthChange = function handleMonthChange(event) {
+    var inputMonth = event.target.value;
+    setYearMonth(inputMonth);
+  };
+
+  var handleCategoryChange = function handleCategoryChange(event) {
+    setSelectedCategory(event.target.value);
+  };
+
+  var handleMoneyFromChange = function handleMoneyFromChange(event) {
+    setMoneyFrom(event.target.value);
+  };
+
+  var handleMoneyToChange = function handleMoneyToChange(event) {
+    setMoneyTo(event.target.value);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card mt-3"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-header"
+  }, "\u30D5\u30A3\u30EB\u30BF\u30FC"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body d-flex"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "form-inline"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u65E5\u4ED8:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mx-2"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "month",
+    id: "purchased_at",
+    value: yearMonth,
+    onChange: handleMonthChange,
+    className: "form-control"
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u30AB\u30C6\u30B4\u30EA: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mx-2"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    className: "form-control",
+    valule: selectedCategory,
+    onChange: handleCategoryChange
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RenderOptions__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    categories: categories
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u91D1\u984D:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mx-2"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    value: moneyFrom,
+    onChange: handleMoneyFromChange,
+    className: "form-control form-inline"
+  }), "~", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    value: moneyTo,
+    onChange: handleMoneyToChange,
+    className: "form-control form-inline"
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-primary"
+  }, "\u7D5E\u308A\u8FBC\u307F")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Filter);
+
+/***/ }),
+
 /***/ "./resources/js/components/Header.js":
 /*!*******************************************!*\
   !*** ./resources/js/components/Header.js ***!
@@ -74284,6 +74419,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Table */ "./resources/js/components/Table.js");
+/* harmony import */ var _Filter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Filter */ "./resources/js/components/Filter.js");
+
 
 
 
@@ -74296,12 +74433,38 @@ var List = function List() {
     className: "row justify-content-center"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-md-10"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Filter__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_3__["default"], {
     header: "\u53CE\u652F\u306E\u4E00\u89A7"
   }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (List);
+
+/***/ }),
+
+/***/ "./resources/js/components/RenderOptions.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/RenderOptions.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var RenderOptions = function RenderOptions(props) {
+  return props.categories.map(function (category, index) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      key: index,
+      value: category
+    }, category);
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (RenderOptions);
 
 /***/ }),
 

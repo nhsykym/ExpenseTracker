@@ -4,9 +4,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
 import Default from './components/Default';
-// import Create from './components/Create';
-// import List from './components/List';
-// import Edit from './components/Edit';
 
 const App = () => {
     return (
