@@ -9,7 +9,6 @@ const App = () => {
     return (
         <BrowserRouter>
                 <Switch>
-                    {/* <Route exact path="/login" component={Login} /> */}
                     <Route path="/" component={Default} />
                 </Switch>
             </BrowserRouter>

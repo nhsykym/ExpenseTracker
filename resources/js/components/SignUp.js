@@ -4,7 +4,7 @@ import axios from 'axios';
 import RenderOptions from './RenderOptions';
 
 
-const Create = (props) => {
+const SignUp = (props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -78,4 +78,4 @@ const Create = (props) => {
   );
 };
 
-export default withRouter(Create);
+export default withRouter(SignUp);

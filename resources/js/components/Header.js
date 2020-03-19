@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <div className="sticky-top">
         <nav className="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -21,35 +21,14 @@ const Header = () => {
                         <li className="nav-item">
                             <Link className="nav-link mx-2" to="/create">+ 新規追加</Link>
                         </li>
-                        {/* <!-- Authentication Links -->
-                        @guest
-                            <li className="nav-item">
-                                <a className="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li className="nav-item">
-                                    <a className="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li className="nav-item dropdown">
-                                <a id="navbarDropdown" className="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span className="caret"></span>
-                                </a>
-
-                                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest*/}
+                        <li className="nav-item">
+                        {/* ログイン状態で表示を変える */}
+                            {props.isAuthenticated ?
+                                <a href="#" onClick={props.logout}>Logout</a>
+                            :
+                                <Link className="nav-link mx-2" to="/signin">SignIn</Link>
+                            }
+                        </li>
                     </ul>
                 </div>
             </div>
