@@ -13,7 +13,7 @@ class ExpenseController extends Controller
     {
         // $limit = $request->input('limit');
         $expenses = Expense::orderBy('purchased_at', 'DESC')->get();
-        Log::debug($expenses);
+        // Log::debug($expenses);
         return $expenses;
     }
     
@@ -32,6 +32,44 @@ class ExpenseController extends Controller
         $categories = Expense::groupBy('category_id')->pluck('category_id');
         // Log::debug($categories);
         return $categories;
+    }
+    
+    public function getFiltered(Request $request) {
+        $yearMonth = $request->yearMonth;
+        $category = $request->category;
+        $moneyFrom = $request->moneyFrom;
+        $moneyTo = $request->moneyTo;
+        Log::debug($request->all());
+        
+        $query = DB::table('expenses');
+        
+        //年月で絞り込み
+        if(isset($yearMonth)) {
+            $query->where('purchased_at', 'like', $yearMonth . '%');
+        }
+        
+        //カテゴリIDで絞り込み
+        if(isset($category)) {
+            $query->where('category_id', $category);
+        }
+        
+        //最低金額で絞り込み
+        if(isset($moneyFrom)) {
+            $query->where('money', '>=', $moneyFrom);
+        }
+        
+        //最高金額で絞り込み
+        if(isset($moneyTo)) {
+            $query->where('money', '<=', $moneyTo);
+        }
+        
+        //結果の取得
+        $expenses = $query->get();
+
+        // Log::debug('Filtered result: ' . $expenses);
+        // Log::debug($query->toSql());
+        // Log::debug($query->getBindings());
+        return $expenses;
     }
     
     public function addExpense(Request $request)

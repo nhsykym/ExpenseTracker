@@ -2,7 +2,7 @@ import React, { useState, useEffect }from 'react';
 import RenderOptions from './RenderOptions';
 import axios from 'axios';
 
-const Filter = () => {
+const Filter = (props) => {
   //年月をyyyy-mm形式で取得
   const getThisMonth = () => {
     const now = new Date();
@@ -44,6 +44,26 @@ const Filter = () => {
   const handleMoneyToChange = (event) => {
     setMoneyTo(event.target.value);
   };
+  
+  const handleSubmit = () => {
+    const data = {
+      yearMonth: yearMonth,
+      category: selectedCategory,
+      moneyFrom: moneyFrom,
+      moneyTo: moneyTo
+    };
+    
+    axios
+      .get('/api/getFiltered', {
+        params: data
+      })
+      .then(res => {
+        props.updateTable(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
  
   return (
       <div className="card mt-3">
@@ -74,7 +94,7 @@ const Filter = () => {
                 </div>
               </div>
             </form>
-            <button type="button" className="btn btn-primary">絞り込み</button>
+            <button type="button" className="btn btn-primary" onClick={handleSubmit}>絞り込み</button>
           </div>
       </div>
     );
