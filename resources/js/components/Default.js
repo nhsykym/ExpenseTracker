@@ -6,6 +6,7 @@ import Home from './Home';
 import Create from './Create';
 import Edit from './Edit';
 import List from './List';
+import SignUp from './SignUp';
 
 const Default = () => {
   return (
@@ -16,6 +17,7 @@ const Default = () => {
               <Route path="/create" component={Create} />
               <Route path="/edit/:id" component={Edit} />
               <Route path="/list" component={List} />
+              <Route path="/signup" component={SignUp} />
           </Switch>
     </React.Fragment>
   );
