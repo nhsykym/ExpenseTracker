@@ -74458,6 +74458,7 @@ var Header = function Header(props) {
     className: "nav-item"
   }, props.isAuthenticated ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
+    className: "nav-link mx-2",
     onClick: props.logout
   }, "Logout") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "nav-link mx-2",
