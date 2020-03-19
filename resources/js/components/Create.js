@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter} from 'react-router-dom';
 import axios from 'axios';
+import RenderOptions from './RenderOptions';
 
 
 const Create = (props) => {
   const [purchased_at, setPurchased_at] = useState('');
   const [title, setTitle] = useState('');
+  const [category, setCategory] = useState(1);
+  const [categories, setCategories] = useState([]);
   const [money, setMoney] = useState('');
   
   const handleInputChange = (e) => {
@@ -16,6 +19,9 @@ const Create = (props) => {
       case 'title':
         setTitle(e.target.value);
         break;
+      case 'category':
+        setCategory(e.target.value);
+        break;
       case 'money':
         setMoney(e.target.value);
         break;
@@ -24,14 +30,26 @@ const Create = (props) => {
     }
   };
   
+  useEffect(() => {
+    axios
+      .get('/api/categories')
+      .then(res => {
+        setCategories(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+  
   const handleSubmit = () => {
-    if({purchased_at} == '' && {title} == '' && {money} == ''){
+    if({purchased_at} == '' && {title} == '' && {money} == '' && {category} == ''){
       return;
     }
     
     const data = {
       purchased_at: purchased_at,
       title: title,
+      category: category,
       money: money
     };
     axios
@@ -60,6 +78,12 @@ const Create = (props) => {
                                 <div className="form-group">
                                   <label>メモ:</label>
                                   <input type="text" name="title" value={title} className="form-control" onChange={handleInputChange} />
+                                </div>
+                                <div className="form-group">
+                                  <label>カテゴリ:</label>
+                                  <select name="category" valule={category} className="form-control" onChange={handleInputChange}>
+                                    <RenderOptions categories={categories}/>
+                                  </select>
                                 </div>
                                 <div className="form-group">
                                   <label>金額:</label>

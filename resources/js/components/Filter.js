@@ -19,7 +19,7 @@ const Filter = (props) => {
   
   useEffect(() => {
     axios
-      .get("/api/categories")
+      .get("/api/usedCategories")
       .then((res) => {
         setCategories(res.data);
       })
