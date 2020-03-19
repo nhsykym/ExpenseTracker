@@ -81,6 +81,7 @@ const Filter = (props) => {
                 <label>カテゴリ: </label>
                 <div className="mx-2">
                   <select className="form-control" valule={selectedCategory} onChange={handleCategoryChange}>
+                    <option value="default">未選択</option>
                     <RenderOptions categories={categories}/>
                   </select>
                 </div>
