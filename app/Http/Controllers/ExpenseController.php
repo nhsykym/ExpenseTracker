@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Expense;
+use App\Category;
 use Log;
 use DB;
 
@@ -27,10 +28,17 @@ class ExpenseController extends Controller
         return $expenses;
     }
     
-    public function getCategories()
+    public function getUsedCategories()
     {
         $categories = Expense::groupBy('category_id')->pluck('category_id');
         // Log::debug($categories);
+        return $categories;
+    }
+    
+    public function getCategories()
+    {
+        $categories = Category::all();
+        Log::debug($categories);
         return $categories;
     }
     
@@ -78,7 +86,7 @@ class ExpenseController extends Controller
         $expense->purchased_at = $request->purchased_at;
         $expense->title = $request->title;
         $expense->money = $request->money;
-        $expense->category_id = 1;
+        $expense->category_id = $request->category;
         $expense->user_id = 1;
         $expense->save();
         return;

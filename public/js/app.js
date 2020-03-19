@@ -73852,6 +73852,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _RenderOptions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RenderOptions */ "./resources/js/components/RenderOptions.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -73859,6 +73860,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -73875,10 +73877,20 @@ var Create = function Create(props) {
       title = _useState4[0],
       setTitle = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(1),
       _useState6 = _slicedToArray(_useState5, 2),
-      money = _useState6[0],
-      setMoney = _useState6[1];
+      category = _useState6[0],
+      setCategory = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      categories = _useState8[0],
+      setCategories = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      money = _useState10[0],
+      setMoney = _useState10[1];
 
   var handleInputChange = function handleInputChange(e) {
     switch (e.target.name) {
@@ -73890,6 +73902,10 @@ var Create = function Create(props) {
         setTitle(e.target.value);
         break;
 
+      case 'category':
+        setCategory(e.target.value);
+        break;
+
       case 'money':
         setMoney(e.target.value);
         break;
@@ -73899,6 +73915,14 @@ var Create = function Create(props) {
     }
   };
 
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/categories').then(function (res) {
+      setCategories(res.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }, []);
+
   var handleSubmit = function handleSubmit() {
     if ({
       purchased_at: purchased_at
@@ -73906,6 +73930,8 @@ var Create = function Create(props) {
       title: title
     } == '' && {
       money: money
+    } == '' && {
+      category: category
     } == '') {
       return;
     }
@@ -73913,6 +73939,7 @@ var Create = function Create(props) {
     var data = {
       purchased_at: purchased_at,
       title: title,
+      category: category,
       money: money
     };
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/add', data).then(function (res) {
@@ -73953,6 +73980,15 @@ var Create = function Create(props) {
     className: "form-control",
     onChange: handleInputChange
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u30AB\u30C6\u30B4\u30EA:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    name: "category",
+    valule: category,
+    className: "form-control",
+    onChange: handleInputChange
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RenderOptions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    categories: categories
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "\u91D1\u984D:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
@@ -74220,7 +74256,7 @@ var Filter = function Filter(props) {
       setMoneyTo = _useState10[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/categories").then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/usedCategories").then(function (res) {
       setCategories(res.data);
     })["catch"](function (error) {
       console.log(error);
@@ -74536,8 +74572,8 @@ var RenderOptions = function RenderOptions(props) {
   return props.categories.map(function (category, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
       key: index,
-      value: category
-    }, category);
+      value: category.id
+    }, category.name);
   });
 };
 
