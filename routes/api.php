@@ -40,3 +40,8 @@ Route::group(['middleware' => 'api'], function(){
     //削除
     Route::post('delete', 'ExpenseController@deleteExpense');
 });
+
+
+Route::group(['middleware' => 'jwt.auth'], function() {
+    Route::get('/expenses', 'ExpenseController@getExpenses');
+});
