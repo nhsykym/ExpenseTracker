@@ -49,7 +49,7 @@ class ExpenseController extends Controller
         }
         
         //カテゴリIDで絞り込み
-        if(isset($category)) {
+        if(isset($category) && $category !== "default") {
             $query->where('category_id', $category);
         }
         
