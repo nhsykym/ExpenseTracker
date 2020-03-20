@@ -30,8 +30,12 @@ class ExpenseController extends Controller
     
     public function getUsedCategories()
     {
-        $categories = Expense::groupBy('category_id')->pluck('category_id');
-        // Log::debug($categories);
+        $categories = DB::table('expenses')
+                        ->join('categories', 'expenses.category_id', '=', 'categories.id')
+                        ->select('categories.id', 'categories.name')
+                        ->distinct()
+                        ->get();
+        Log::debug($categories);
         return $categories;
     }
     

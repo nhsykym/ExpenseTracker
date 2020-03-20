@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Bar} from 'react-chartjs-2';
 import axios from 'axios';
 
-const BarChart = () => {
+const BarChart = (props) => {
   const [chartData, setChartData] = useState({});
   
   useEffect(() => {
@@ -11,7 +11,8 @@ const BarChart = () => {
   
   const getChartData = () => {
     axios
-      .get("/api/getChartData")
+      .get("/api/getChartData", {
+                headers: { 'Authorization': 'Bearer ' + props.token }})
       .then(res => {
         const expenses = res.data;
         let labels = [];
@@ -20,8 +21,13 @@ const BarChart = () => {
         labels.push(expense.purchased_at);
         data.push(expense.money);
       });
-
-     console.log(expenses);
+      // .catch(error => {
+      //   console.log(error);
+      //   const status = error.response.status;
+      //   if (status === 401 && props.isAuthenticated) {
+      //       props.refresh();
+      //   }});
+      
       setChartData({
           labels:labels,
           datasets: [

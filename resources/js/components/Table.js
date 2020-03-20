@@ -1,6 +1,5 @@
-import React, { useState, useEffect} from 'react';
+import React from 'react';
 import RenderRows from './RenderRows';
-import axios from 'axios';
 
 const Table = (props) => {
     return (

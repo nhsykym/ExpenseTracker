@@ -4,7 +4,7 @@ import axios from 'axios';
 import Table from './Table';
 import Filter from './Filter';
 
-const List = () => {
+const List = (props) => {
     const [expenses, setExpenses] = useState([]);
 
     const updateTable = (result) => {
@@ -13,13 +13,16 @@ const List = () => {
 
     useEffect(() => {
         axios
-            .get('/api/get')
+            .get('/api/get', {
+                headers: { 'Authorization': 'Bearer ' + props.token }})
             .then((res) => {
                 setExpenses(res.data);
-                console.log("get! " + res.data);
                 })
             .catch(error => {
-                console.log(error);
+                const status = error.response.status;
+                if (status === 401 && props.isAuthenticated) {
+                    props.refresh();
+                }
             });
     }, []);
 
@@ -27,7 +30,7 @@ const List = () => {
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-10">
-                    <Filter updateTable={updateTable}/>
+                    <Filter token={props.token} isAuthenticated={props.isAuthenticated} refresh={props.refresh} updateTable={updateTable}/>
                     <Table header="収支の一覧" expenses={expenses} updateTable={updateTable}/>
                 </div>
             </div>
