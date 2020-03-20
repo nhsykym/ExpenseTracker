@@ -20,8 +20,7 @@ const BarChart = () => {
         labels.push(expense.purchased_at);
         data.push(expense.money);
       });
-
-     console.log(expenses);
+      
       setChartData({
           labels:labels,
           datasets: [

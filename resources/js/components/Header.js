@@ -24,7 +24,7 @@ const Header = (props) => {
                         <li className="nav-item">
                         {/* ログイン状態で表示を変える */}
                             {props.isAuthenticated ?
-                                <a href="#" className="nav-link mx-2" onClick={props.logout}>Logout</a>
+                                <a href="" className="nav-link mx-2" onClick={props.logout}>Logout</a>
                             :
                                 <Link className="nav-link mx-2" to="/signin">SignIn</Link>
                             }

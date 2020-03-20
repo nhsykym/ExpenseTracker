@@ -8,10 +8,10 @@ import Default from './components/Default';
 const App = () => {
     return (
         <BrowserRouter>
-                <Switch>
-                    <Route path="/" component={Default} />
-                </Switch>
-            </BrowserRouter>
+            <Switch>
+                <Route path="/" component={Default} />
+            </Switch>
+        </BrowserRouter>
     );
     
 };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter} from 'react-router-dom';
 import axios from 'axios';
 import RenderOptions from './RenderOptions';
 
@@ -49,24 +48,17 @@ const SignIn = (props) => {
                         <div className="card-header">SignIn
                         </div>
                         <div className="card-body w-50">
-                        {/* ログイン状態で表示を変える */}
-                          {props.isAuthenticated ?
-                            <p>You are already logged in.</p>
-                            :  
-                            <div>
-                              <div className="form-group">
-                                <label>email:</label>
-                                <input type="email" name="email" value={email} className="form-control" onChange={handleInputChange} />
-                              </div>
-                              <div className="form-group">
-                                <label>パスワード:</label>
-                                <input type="text" name="password" value={password} className="form-control" onChange={handleInputChange} />
-                              </div>
-                              <div>
-                                <button className="btn btn-primary" onClick={handleSubmit}>Login</button> 
-                              </div>
-                            </div>
-                          }
+                          <div className="form-group">
+                            <label>email:</label>
+                            <input type="email" name="email" value={email} className="form-control" onChange={handleInputChange} />
+                          </div>
+                          <div className="form-group">
+                            <label>パスワード:</label>
+                            <input type="text" name="password" value={password} className="form-control" onChange={handleInputChange} />
+                          </div>
+                          <div>
+                            <button className="btn btn-primary" onClick={handleSubmit}>Login</button> 
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -75,4 +67,4 @@ const SignIn = (props) => {
   );
 };
 
-export default withRouter(SignIn);
+export default SignIn;

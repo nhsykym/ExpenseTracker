@@ -4,7 +4,7 @@ import axios from 'axios';
 import Table from './Table';
 import Filter from './Filter';
 
-const List = () => {
+const List = (props) => {
     const [expenses, setExpenses] = useState([]);
 
     const updateTable = (result) => {
@@ -12,11 +12,13 @@ const List = () => {
     };
 
     useEffect(() => {
+        const token = props.token;
         axios
-            .get('/api/get')
+            .get('/api/get', {
+                header: {'Authorization': 'Bearer ' + token}
+            })
             .then((res) => {
                 setExpenses(res.data);
-                console.log("get! " + res.data);
                 })
             .catch(error => {
                 console.log(error);

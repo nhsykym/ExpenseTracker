@@ -5,7 +5,7 @@ import Table from './Table';
 import BarChart from './BarChart';
 
 
-const Home = () => {
+const Dashboard= () => {
     const [expenses, setExpenses] = useState([]);
     
     const updateTable = (res) => {
@@ -17,7 +17,6 @@ const Home = () => {
             .get('/api/get')
             .then((res) => {
                 setExpenses(res.data);
-                console.log("get! " + res.data);
                 })
             .catch(error => {
                 console.log(error);
@@ -29,7 +28,7 @@ const Home = () => {
             <div className="row justify-content-center">
                 <div className="col-md-12">
                     <div className="card mt-3">
-                        <div className="card-header">Dashboard</div>
+                        <div className="card-header">Overview</div>
                         <div className="card-body d-flex">
                             <div className="w-50">
                                 <BarChart />
@@ -46,4 +45,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Dashboard;
