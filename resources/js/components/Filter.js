@@ -16,6 +16,7 @@ const Filter = (props) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [moneyFrom, setMoneyFrom] = useState('');
   const [moneyTo, setMoneyTo] = useState('');
+  const [error, setError] = useState('');
   
   useEffect(() => {
     const token = props.token;
@@ -59,9 +60,20 @@ const Filter = (props) => {
       moneyTo: moneyTo
     };
     
+    try {
+      if (moneyFrom > moneyTo) {
+        setError('金額が不正です');
+        throw 'MoneyError';
+      }
+    } catch (e) {
+      setError('金額が不正です');
+    }
+    
+    const token = props.token;
     axios
       .get('/api/getFiltered', {
-        params: data
+        params: data,
+        headers: {'Authorization': 'Bearer ' + token}
       })
       .then(res => {
         props.updateTable(res.data);
@@ -102,6 +114,7 @@ const Filter = (props) => {
               </div>
             </form>
             <button type="button" className="btn btn-primary" onClick={handleSubmit}>絞り込み</button>
+            { error !== '' ? <p>{error}</p> : ''}
           </div>
       </div>
     );

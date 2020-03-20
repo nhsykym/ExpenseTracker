@@ -74480,6 +74480,11 @@ var Filter = function Filter(props) {
       moneyTo = _useState10[0],
       setMoneyTo = _useState10[1];
 
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      error = _useState12[0],
+      setError = _useState12[1];
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var token = props.token;
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/usedCategories", {
@@ -74522,8 +74527,22 @@ var Filter = function Filter(props) {
       moneyFrom: moneyFrom,
       moneyTo: moneyTo
     };
+
+    try {
+      if (moneyFrom > moneyTo) {
+        setError('金額が不正です');
+        throw 'MoneyError';
+      }
+    } catch (e) {
+      setError('金額が不正です');
+    }
+
+    var token = props.token;
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/getFiltered', {
-      params: data
+      params: data,
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
     }).then(function (res) {
       props.updateTable(res.data);
     })["catch"](function (error) {
@@ -74579,7 +74598,7 @@ var Filter = function Filter(props) {
     type: "button",
     className: "btn btn-primary",
     onClick: handleSubmit
-  }, "\u7D5E\u308A\u8FBC\u307F")));
+  }, "\u7D5E\u308A\u8FBC\u307F"), error !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, error) : ''));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Filter);
