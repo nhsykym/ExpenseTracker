@@ -23,6 +23,9 @@ Route::group(['middleware' => 'api'], function(){
     Route::post('/signup', 'FrontEndUserController@signUp');
     Route::post('/signin', 'FrontEndUserController@signIn');
     
+    //トークン再発行
+    Route::get('/refreshToken', 'FrontEndUserController@refreshToken');
+    
     //新規追加
     Route::get('categories', 'ExpenseController@getCategories');
     Route::post('add', 'ExpenseController@addExpense');
@@ -43,5 +46,20 @@ Route::group(['middleware' => 'api'], function(){
 
 
 Route::group(['middleware' => 'jwt.auth'], function() {
-    Route::get('/expenses', 'ExpenseController@getExpenses');
+    //新規追加
+    Route::get('categories', 'ExpenseController@getCategories');
+    Route::post('add', 'ExpenseController@addExpense');
+    
+    //一覧表示
+    Route::get('get', 'ExpenseController@getExpenses');
+    Route::get('getChartData', 'ExpenseController@getChartData');
+    Route::get('usedCategories', 'ExpenseController@getUsedCategories');
+    Route::get('getFiltered', 'ExpenseController@getFiltered');
+    
+    //編集
+    Route::get('edit/{expense_id}', 'ExpenseController@showExpense');
+    Route::patch('edit/{expense_id}', 'ExpenseController@editExpense');
+    
+    //削除
+    Route::post('delete', 'ExpenseController@deleteExpense');
 });

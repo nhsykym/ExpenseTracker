@@ -21,7 +21,10 @@ const Dashboard= (props) => {
                 setExpenses(res.data);
                 })
             .catch(error => {
-                console.log(error);
+                const status = error.response.status;
+                if (status === 401 && this.props.isAuthenticated) {
+                    props.refresh();
+                }
             });
     }, []);
     

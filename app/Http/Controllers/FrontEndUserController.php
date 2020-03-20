@@ -17,8 +17,6 @@ class FrontEndUserController extends Controller
         'email' => $request->email,
         'password' => bcrypt($request->password)
       ]);
-      
-      Log::debug($user);
     }
     
     public function signIn(Request $request)
@@ -34,5 +32,19 @@ class FrontEndUserController extends Controller
       Log::debug(compact('token'));
       return response()->json(compact('token'));
       
+    }
+    
+    public function refreshToken()
+    {
+      $token = JWTAuth::getToken();
+      
+      try {
+          $token = JWTAuth::refresh($token);
+          Log::debug('New token: ' . $token);
+      } catch (JWTException $e) {
+          return response()->json(['error' => 'could_not_create_token'], 500);
+      }
+  
+      return response()->json(compact('token'));
     }
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { axios } from 'axios';
 
 import Header from './Header';
 import Home from './Home';
@@ -24,18 +25,21 @@ const Default = (props) => {
     setToken(null);
   };
   
-  /* const PrivateRoute = ({component: Component, isAuthenticated, token, ...rest}) => (
-    <Route {...rest} render={props => (
-      isAuthenticated ? (
-        <Component {...props} {...rest} token={token} isAuthenticated={isAuthenticated} />
-      ) : (
-        <Redirect to={{
-          pathname: '/signin',
-          state: {from: props.location}
-        }}/>
-      )
-    ) }/>
-  ); */
+  const refresh = () => {
+    return (
+      axios.get('/api/refreshToken', {
+          headers: { 'Authorization': 'Bearer ' + token }
+      })
+      .then((res) => {
+          const token = res.data.token;
+          authenticate(token);
+      })
+      .catch((error) => {
+          console.log('Error!', error);
+      })
+    );
+  };
+  
   const PrivateRoute = ({ component: Component, isAuthenticated, token, ...rest }) => (
     <Route {...rest} render={props => (
         isAuthenticated ? (
@@ -47,20 +51,23 @@ const Default = (props) => {
             } } />
         )
     )} />
-);
+  );
   
   return (
     <BrowserRouter>
       <Header isAuthenticated={isAuthenticated} logout={logout}/>
       <Switch>
+        {/* 未ログインでもアクセス可能 */}
         <Route exact path="/" component={Home} />
-        <PrivateRoute exact path='/dashboard' component={Dashboard} isAuthenticated={isAuthenticated} token={token} />
         <Route path="/signin" render={
           (props) => <SignIn authenticate={authenticate} isAuthenticated={isAuthenticated} {...props} />} />
-        {/* <Route path="/signup" component={SignUp} />
-        <Route path="/list" component={List} />
-        <Route path="/create" component={Create} />
-        <Route path="/edit/:id" component={Edit} /> */}
+        <Route path="/signup" component={SignUp} />
+        
+        {/* ログイン時のみアクセス可能 */}
+        <PrivateRoute exact path='/dashboard' component={Dashboard} isAuthenticated={isAuthenticated} token={token} refresh={refresh} />
+        <PrivateRoute path="/list" component={List} isAuthenticated={isAuthenticated} token={token} refresh={refresh} />
+        <PrivateRoute path="/create" component={Create} isAuthenticated={isAuthenticated} token={token} refresh={refresh} />
+        <PrivateRoute path="/edit/:id" component={Edit} isAuthenticated={isAuthenticated} token={token} refresh={refresh} />
       </Switch>
     </BrowserRouter>
   );

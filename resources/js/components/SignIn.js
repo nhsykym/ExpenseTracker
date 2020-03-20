@@ -23,10 +23,6 @@ const SignIn = (props) => {
   };
   
   const handleSubmit = () => {
-    if({email} == '' || {password} == ''){
-      setError('Username or password not filled.');
-    }
-    
     const data = {
       email: email,
       password: password
