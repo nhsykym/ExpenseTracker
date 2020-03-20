@@ -13,10 +13,9 @@ const Dashboard= (props) => {
     };
     
     useEffect(() => {
-        const token = props.token;
         axios
             .get('/api/get', {
-                headers: { 'Authorization': 'Bearer ' + token }})
+                headers: { 'Authorization': 'Bearer ' + props.token }})
             .then((res) => {
                 setExpenses(res.data);
                 })
@@ -36,10 +35,10 @@ const Dashboard= (props) => {
                         <div className="card-header">Overview</div>
                         <div className="card-body d-flex">
                             <div className="w-50">
-                                <BarChart />
+                                <BarChart token={props.token}/>
                             </div>
                             <div className="w-50">
-                                <BarChart />
+                                <BarChart token={props.token}/>
                             </div>
                         </div>
                     </div>

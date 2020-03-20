@@ -73794,7 +73794,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var BarChart = function BarChart() {
+var BarChart = function BarChart(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
       _useState2 = _slicedToArray(_useState, 2),
       chartData = _useState2[0],
@@ -73805,7 +73805,11 @@ var BarChart = function BarChart() {
   }, []);
 
   var getChartData = function getChartData() {
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/getChartData").then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/getChartData", {
+      headers: {
+        'Authorization': 'Bearer ' + props.token
+      }
+    }).then(function (res) {
       var expenses = res.data;
       var labels = [];
       var data = [];
@@ -74045,10 +74049,9 @@ var Dashboard = function Dashboard(props) {
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var token = props.token;
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get', {
       headers: {
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
       setExpenses(res.data);
@@ -74074,9 +74077,13 @@ var Dashboard = function Dashboard(props) {
     className: "card-body d-flex"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-50"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    token: props.token
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-50"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"], null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    token: props.token
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_3__["default"], {
     header: "\u6700\u8FD1\u306E\u53CE\u652F",
     expenses: expenses,
     updateTable: updateTable
