@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { axios } from 'axios';
 
@@ -18,16 +18,19 @@ const Default = (props) => {
   const authenticate = (token) => {
     setIsAuthenticated(true);
     setToken(token);
+    localStorage.setItem('jwt', token);
   };
   
   const logout = () => {
     setIsAuthenticated(false);
     setToken(null);
+    localStorage.removeItem('jwt');
   };
   
   const refresh = () => {
     return (
-      axios.get('/api/refreshToken', {
+      axios
+      .get('/api/refreshToken', {
           headers: { 'Authorization': 'Bearer ' + token }
       })
       .then((res) => {
@@ -39,6 +42,13 @@ const Default = (props) => {
       })
     );
   };
+  
+  useEffect(() => {
+    const lsToken = localStorage.getItem('jwt');
+    if (lsToken) {
+        authenticate(lsToken);
+    }
+  })
   
   const PrivateRoute = ({ component: Component, isAuthenticated, token, ...rest }) => (
     <Route {...rest} render={props => (

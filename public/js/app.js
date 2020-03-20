@@ -73816,7 +73816,13 @@ var BarChart = function BarChart(props) {
       expenses.forEach(function (expense) {
         labels.push(expense.purchased_at);
         data.push(expense.money);
-      });
+      }); // .catch(error => {
+      //   console.log(error);
+      //   const status = error.response.status;
+      //   if (status === 401 && props.isAuthenticated) {
+      //       props.refresh();
+      //   }});
+
       setChartData({
         labels: labels,
         datasets: [{
@@ -73916,10 +73922,20 @@ var Create = function Create(props) {
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/categories').then(function (res) {
+    var token = props.token;
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/categories', {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }).then(function (res) {
       setCategories(res.data);
     })["catch"](function (error) {
       console.log(error);
+      var status = error.response.status;
+
+      if (status === 401 && props.isAuthenticated) {
+        props.refresh();
+      }
     });
   }, []);
 
@@ -74078,6 +74094,8 @@ var Dashboard = function Dashboard(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-50"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    refresh: props.refresh,
+    isAuthenticated: props.isAuthenticated,
     token: props.token
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-50"
@@ -74156,11 +74174,13 @@ var Default = function Default(props) {
   var authenticate = function authenticate(token) {
     setIsAuthenticated(true);
     setToken(token);
+    localStorage.setItem('jwt', token);
   };
 
   var logout = function logout() {
     setIsAuthenticated(false);
     setToken(null);
+    localStorage.removeItem('jwt');
   };
 
   var refresh = function refresh() {
@@ -74175,6 +74195,14 @@ var Default = function Default(props) {
       console.log('Error!', error);
     });
   };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    var lsToken = localStorage.getItem('jwt');
+
+    if (lsToken) {
+      authenticate(lsToken);
+    }
+  });
 
   var PrivateRoute = function PrivateRoute(_ref) {
     var Component = _ref.component,
@@ -74453,10 +74481,20 @@ var Filter = function Filter(props) {
       setMoneyTo = _useState10[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/usedCategories").then(function (res) {
+    var token = props.token;
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/usedCategories", {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }).then(function (res) {
       setCategories(res.data);
     })["catch"](function (error) {
       console.log(error);
+      var status = error.response.status;
+
+      if (status === 401 && props.isAuthenticated) {
+        props.refresh();
+      }
     });
   }, []);
 
@@ -74687,15 +74725,18 @@ var List = function List(props) {
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var token = props.token;
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/get', {
-      header: {
-        'Authorization': 'Bearer ' + token
+      headers: {
+        'Authorization': 'Bearer ' + props.token
       }
     }).then(function (res) {
       setExpenses(res.data);
     })["catch"](function (error) {
-      console.log(error);
+      var status = error.response.status;
+
+      if (status === 401 && props.isAuthenticated) {
+        props.refresh();
+      }
     });
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74705,6 +74746,9 @@ var List = function List(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-md-10"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Filter__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    token: props.token,
+    isAuthenticated: props.isAuthenticated,
+    refresh: props.refresh,
     updateTable: updateTable
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Table__WEBPACK_IMPORTED_MODULE_3__["default"], {
     header: "\u53CE\u652F\u306E\u4E00\u89A7",
@@ -75069,9 +75113,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _RenderRows__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RenderRows */ "./resources/js/components/RenderRows.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-
 
 
 

@@ -31,13 +31,20 @@ const Create = (props) => {
   };
   
   useEffect(() => {
+    const token = props.token;
     axios
-      .get('/api/categories')
+      .get('/api/categories', {
+        headers: {'Authorization': 'Bearer ' + token}
+      })
       .then(res => {
         setCategories(res.data);
       })
       .catch(error => {
         console.log(error);
+        const status = error.response.status;
+        if (status === 401 && props.isAuthenticated) {
+            props.refresh();
+        }
       });
   }, []);
   

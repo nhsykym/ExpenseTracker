@@ -8,4 +8,4 @@ const RenderOptions = (props) => {
     });
 };
 
-export default RenderOptions;   
+export default RenderOptions;

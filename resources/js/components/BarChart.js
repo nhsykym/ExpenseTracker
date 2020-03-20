@@ -21,6 +21,12 @@ const BarChart = (props) => {
         labels.push(expense.purchased_at);
         data.push(expense.money);
       });
+      // .catch(error => {
+      //   console.log(error);
+      //   const status = error.response.status;
+      //   if (status === 401 && props.isAuthenticated) {
+      //       props.refresh();
+      //   }});
       
       setChartData({
           labels:labels,

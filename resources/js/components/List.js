@@ -12,16 +12,17 @@ const List = (props) => {
     };
 
     useEffect(() => {
-        const token = props.token;
         axios
             .get('/api/get', {
-                header: {'Authorization': 'Bearer ' + token}
-            })
+                headers: { 'Authorization': 'Bearer ' + props.token }})
             .then((res) => {
                 setExpenses(res.data);
                 })
             .catch(error => {
-                console.log(error);
+                const status = error.response.status;
+                if (status === 401 && props.isAuthenticated) {
+                    props.refresh();
+                }
             });
     }, []);
 
@@ -29,7 +30,7 @@ const List = (props) => {
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-10">
-                    <Filter updateTable={updateTable}/>
+                    <Filter token={props.token} isAuthenticated={props.isAuthenticated} refresh={props.refresh} updateTable={updateTable}/>
                     <Table header="収支の一覧" expenses={expenses} updateTable={updateTable}/>
                 </div>
             </div>

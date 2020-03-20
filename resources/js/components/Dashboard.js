@@ -35,7 +35,7 @@ const Dashboard= (props) => {
                         <div className="card-header">Overview</div>
                         <div className="card-body d-flex">
                             <div className="w-50">
-                                <BarChart token={props.token}/>
+                                <BarChart refresh={props.refresh} isAuthenticated={props.isAuthenticated} token={props.token}/>
                             </div>
                             <div className="w-50">
                                 <BarChart token={props.token}/>
