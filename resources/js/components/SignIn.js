@@ -7,6 +7,7 @@ import RenderOptions from './RenderOptions';
 const SignIn = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   
   const handleInputChange = (e) => {
     switch(e.target.name) {
@@ -22,8 +23,8 @@ const SignIn = (props) => {
   };
   
   const handleSubmit = () => {
-    if({email} == '' && {password} == ''){
-      return;
+    if({email} == '' || {password} == ''){
+      setError('Username or password not filled.');
     }
     
     const data = {
@@ -33,11 +34,15 @@ const SignIn = (props) => {
     axios
       .post('/api/signin', data)
       .then(res => {
+        setError('');
         const token = res.data.token;
         props.authenticate(token);
       })
       .catch(error => {
-        console.log(error);
+        const status = error.response.status;
+        if (status == 401) {
+          setError('Username or password not recognised.');
+        }
       });
   };
   
@@ -66,6 +71,8 @@ const SignIn = (props) => {
                                 <label>パスワード:</label>
                                 <input type="text" name="password" value={password} className="form-control" onChange={handleInputChange} />
                               </div>
+                              {/* エラー時に表示 */}
+                              { error !== '' ? <p className="text-danger">{error}</p> : null}
                               <div>
                                 <button className="btn btn-primary" onClick={handleSubmit}>Login</button> 
                               </div>

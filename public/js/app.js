@@ -74799,6 +74799,11 @@ var SignIn = function SignIn(props) {
       password = _useState4[0],
       setPassword = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      error = _useState6[0],
+      setError = _useState6[1];
+
   var handleInputChange = function handleInputChange(e) {
     switch (e.target.name) {
       case 'email':
@@ -74817,10 +74822,10 @@ var SignIn = function SignIn(props) {
   var handleSubmit = function handleSubmit() {
     if ({
       email: email
-    } == '' && {
+    } == '' || {
       password: password
     } == '') {
-      return;
+      setError('Username or password not filled.');
     }
 
     var data = {
@@ -74828,10 +74833,15 @@ var SignIn = function SignIn(props) {
       password: password
     };
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/signin', data).then(function (res) {
+      setError('');
       var token = res.data.token;
       props.authenticate(token);
     })["catch"](function (error) {
-      console.log(error);
+      var status = error.response.status;
+
+      if (status == 401) {
+        setError('Username or password not recognised.');
+      }
     });
   };
 
@@ -74869,7 +74879,9 @@ var SignIn = function SignIn(props) {
         value: password,
         className: "form-control",
         onChange: handleInputChange
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), error !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "text-danger"
+      }, error) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary",
         onClick: handleSubmit
       }, "Login")))))));
