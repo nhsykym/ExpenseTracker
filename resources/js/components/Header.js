@@ -13,7 +13,7 @@ const Header = (props) => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <Link className="nav-link mx-2" to="/">Home</Link>
+                            <Link className="nav-link mx-2" to="/dashboard">Home</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link mx-2" to="/list">List</Link>
@@ -24,7 +24,7 @@ const Header = (props) => {
                         <li className="nav-item">
                         {/* ログイン状態で表示を変える */}
                             {props.isAuthenticated ?
-                                <a href="" className="nav-link mx-2" onClick={props.logout}>Logout</a>
+                                <Link className="nav-link mx-2" to="/signin" onClick={props.logout}>Logout</Link>
                             :
                                 <Link className="nav-link mx-2" to="/signin">SignIn</Link>
                             }

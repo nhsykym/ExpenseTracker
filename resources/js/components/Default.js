@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import Header from './Header';
+import Home from './Home';
 import Dashboard from './Dashboard';
 import Create from './Create';
 import Edit from './Edit';
@@ -10,7 +11,7 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 
 const Default = (props) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [token, setToken] = useState(null);
   
   const authenticate = (token) => {
@@ -23,7 +24,7 @@ const Default = (props) => {
     setToken(null);
   };
   
-  const PrivateRoute = ({component: Component, isAuthenticated, token, ...rest}) => (
+  /* const PrivateRoute = ({component: Component, isAuthenticated, token, ...rest}) => (
     <Route {...rest} render={props => (
       isAuthenticated ? (
         <Component {...props} {...rest} token={token} isAuthenticated={isAuthenticated} />
@@ -34,21 +35,34 @@ const Default = (props) => {
         }}/>
       )
     ) }/>
-  );
+  ); */
+  const PrivateRoute = ({ component: Component, isAuthenticated, token, ...rest }) => (
+    <Route {...rest} render={props => (
+        isAuthenticated ? (
+            <Component {...props} {...rest} token={token} isAuthenticated={isAuthenticated} />
+        ) : (
+            <Redirect to={ {
+                pathname: '/signin',
+                state: { from: props.location }
+            } } />
+        )
+    )} />
+);
   
   return (
-    <React.Fragment>
-        <Header isAuthenticated={isAuthenticated} logout={logout}/>
-        <PrivateRoute exact path='/list' component={List} isAuthenticated={isAuthenticated} token={token} />
-        
-        {isAuthenticated ? <Redirect to="/list"/> : ""}
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/signup" component={SignUp} />
+    <BrowserRouter>
+      <Header isAuthenticated={isAuthenticated} logout={logout}/>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <PrivateRoute exact path='/dashboard' component={Dashboard} isAuthenticated={isAuthenticated} token={token} />
         <Route path="/signin" render={
           (props) => <SignIn authenticate={authenticate} isAuthenticated={isAuthenticated} {...props} />} />
+        {/* <Route path="/signup" component={SignUp} />
+        <Route path="/list" component={List} />
         <Route path="/create" component={Create} />
-        <Route path="/edit/:id" component={Edit} />
-    </React.Fragment>
+        <Route path="/edit/:id" component={Edit} /> */}
+      </Switch>
+    </BrowserRouter>
   );
 };
 

@@ -5,7 +5,7 @@ import Table from './Table';
 import BarChart from './BarChart';
 
 
-const Dashboard= () => {
+const Dashboard= (props) => {
     const [expenses, setExpenses] = useState([]);
     
     const updateTable = (res) => {
@@ -13,8 +13,10 @@ const Dashboard= () => {
     };
     
     useEffect(() => {
+        const token = props.token;
         axios
-            .get('/api/get')
+            .get('/api/get', {
+                headers: { 'Authorization': 'Bearer ' + token }})
             .then((res) => {
                 setExpenses(res.data);
                 })
