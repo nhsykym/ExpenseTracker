@@ -25,6 +25,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "@material-ui/core": "^4.9.7",
         "chart.js": "^2.9.3",
         "react-chartjs-2": "^2.9.0",
         "react-router-dom": "^5.1.2"

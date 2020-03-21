@@ -1,6 +1,7 @@
 import React, { useState, useEffect }from 'react';
 import RenderOptions from './RenderOptions';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 
 const Filter = (props) => {
   //年月をyyyy-mm形式で取得
@@ -117,7 +118,9 @@ const Filter = (props) => {
                 </div>
               </div>
             </form>
-            <button type="button" className="btn btn-primary" onClick={handleSubmit}>絞り込み</button>
+            <Button variant="contained" color="primary" onClick={handleSubmit}>
+              検索
+            </Button>
             { error !== '' ? <p>{error}</p> : ''}
           </div>
       </div>
