@@ -16,6 +16,8 @@ const Filter = (props) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [moneyFrom, setMoneyFrom] = useState('');
   const [moneyTo, setMoneyTo] = useState('');
+  const [money, setMoney] = useState({min: '1', max: ''});
+  const [error, setError] = useState('');
   
   useEffect(() => {
     const token = props.token;
@@ -34,6 +36,14 @@ const Filter = (props) => {
       });
   }, []);
   
+  useEffect(() => {
+    if (money.min > money.max && money.max !== '') {
+      setError('金額が不正です');
+    } else {
+      setError('');
+    }
+  });
+  
   const handleMonthChange = (event) => {
     const inputMonth = event.target.value;
     setYearMonth(inputMonth);
@@ -43,25 +53,31 @@ const Filter = (props) => {
     setSelectedCategory(event.target.value);
   };
   
-  const handleMoneyFromChange = (event) => {
-    setMoneyFrom(event.target.value);
+  const handleMoneyChange = (event) => {
+    switch (event.target.name) {
+      case 'min':
+        setMoney({...money, min: event.target.value});
+        break;
+      case 'max':
+        setMoney({...money, max: event.target.value});
+        break;
+    }
   };
-  
-  const handleMoneyToChange = (event) => {
-    setMoneyTo(event.target.value);
-  };
+ 
   
   const handleSubmit = () => {
     const data = {
       yearMonth: yearMonth,
       category: selectedCategory,
-      moneyFrom: moneyFrom,
-      moneyTo: moneyTo
+      moneyFrom: money.min,
+      moneyTo: money.max
     };
     
+    const token = props.token;
     axios
       .get('/api/getFiltered', {
-        params: data
+        params: data,
+        headers: {'Authorization': 'Bearer ' + token}
       })
       .then(res => {
         props.updateTable(res.data);
@@ -95,13 +111,14 @@ const Filter = (props) => {
               <div className="form-group">
                 <label>金額:</label>
                 <div className="mx-2">
-                  <input type="text" value={moneyFrom} onChange={handleMoneyFromChange} className="form-control form-inline" />
+                  <input type="text" name="min" value={money.min} onChange={handleMoneyChange} className="form-control form-inline" />
                   ~
-                  <input type="text" value={moneyTo} onChange={handleMoneyToChange} className="form-control form-inline" />
+                  <input type="text" name="max" value={money.from} onChange={handleMoneyChange} className="form-control form-inline" />
                 </div>
               </div>
             </form>
             <button type="button" className="btn btn-primary" onClick={handleSubmit}>絞り込み</button>
+            { error !== '' ? <p>{error}</p> : ''}
           </div>
       </div>
     );

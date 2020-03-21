@@ -73958,7 +73958,13 @@ var Create = function Create(props) {
       category: category,
       money: money
     };
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/add', data).then(function (res) {
+    var token = props.token;
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/add', {
+      data: data,
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }).then(function (res) {
       props.history.push("/list");
     })["catch"](function (error) {
       console.log(error);
@@ -74434,6 +74440,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RenderOptions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RenderOptions */ "./resources/js/components/RenderOptions.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -74480,6 +74492,19 @@ var Filter = function Filter(props) {
       moneyTo = _useState10[0],
       setMoneyTo = _useState10[1];
 
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    min: '1',
+    max: ''
+  }),
+      _useState12 = _slicedToArray(_useState11, 2),
+      money = _useState12[0],
+      setMoney = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      error = _useState14[0],
+      setError = _useState14[1];
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var token = props.token;
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/usedCategories", {
@@ -74497,6 +74522,13 @@ var Filter = function Filter(props) {
       }
     });
   }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (money.min > money.max && money.max !== '') {
+      setError('金額が不正です');
+    } else {
+      setError('');
+    }
+  });
 
   var handleMonthChange = function handleMonthChange(event) {
     var inputMonth = event.target.value;
@@ -74507,23 +74539,35 @@ var Filter = function Filter(props) {
     setSelectedCategory(event.target.value);
   };
 
-  var handleMoneyFromChange = function handleMoneyFromChange(event) {
-    setMoneyFrom(event.target.value);
-  };
+  var handleMoneyChange = function handleMoneyChange(event) {
+    switch (event.target.name) {
+      case 'min':
+        setMoney(_objectSpread({}, money, {
+          min: event.target.value
+        }));
+        break;
 
-  var handleMoneyToChange = function handleMoneyToChange(event) {
-    setMoneyTo(event.target.value);
+      case 'max':
+        setMoney(_objectSpread({}, money, {
+          max: event.target.value
+        }));
+        break;
+    }
   };
 
   var handleSubmit = function handleSubmit() {
     var data = {
       yearMonth: yearMonth,
       category: selectedCategory,
-      moneyFrom: moneyFrom,
-      moneyTo: moneyTo
+      moneyFrom: money.min,
+      moneyTo: money.max
     };
+    var token = props.token;
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/getFiltered', {
-      params: data
+      params: data,
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
     }).then(function (res) {
       props.updateTable(res.data);
     })["catch"](function (error) {
@@ -74567,19 +74611,21 @@ var Filter = function Filter(props) {
     className: "mx-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
-    value: moneyFrom,
-    onChange: handleMoneyFromChange,
+    name: "min",
+    value: money.min,
+    onChange: handleMoneyChange,
     className: "form-control form-inline"
   }), "~", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
-    value: moneyTo,
-    onChange: handleMoneyToChange,
+    name: "max",
+    value: money.from,
+    onChange: handleMoneyChange,
     className: "form-control form-inline"
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "btn btn-primary",
     onClick: handleSubmit
-  }, "\u7D5E\u308A\u8FBC\u307F")));
+  }, "\u7D5E\u308A\u8FBC\u307F"), error !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, error) : ''));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Filter);

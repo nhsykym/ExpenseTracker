@@ -59,8 +59,12 @@ const Create = (props) => {
       category: category,
       money: money
     };
+    
+    const token = props.token;
     axios
-      .post('/api/add', data)
+      .post('/api/add', {
+        data,
+        headers: {'Authorization': 'Bearer ' + token}})
       .then(res => {
         props.history.push("/list");
       })
