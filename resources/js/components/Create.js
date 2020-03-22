@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter} from 'react-router-dom';
 import axios from 'axios';
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 import RenderOptions from './RenderOptions';
+import Title from './Title';
 
 
 const Create = (props) => {
@@ -52,14 +65,12 @@ const Create = (props) => {
     if({purchased_at} == '' && {title} == '' && {money} == '' && {category} == ''){
       return;
     }
-    
     const data = {
       purchased_at: purchased_at,
       title: title,
       category: category,
       money: money
     };
-    
     const token = props.token;
     axios
       .post('/api/add', {
@@ -73,42 +84,88 @@ const Create = (props) => {
       });
   };
   
+  const classes = props.useStyles();
+  
   return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-10">
-                    <div className="card mt-3">
-                        <div className="card-header">新規追加
-                        </div>
-                        <div className="card-body">
-                            <div className="w-50">
-                                <div className="form-group">
-                                  <label>日付:</label>
-                                  <input type="date" name="purchased_at" value={purchased_at} className="form-control" onChange={handleInputChange} />
-                                </div>
-                                <div className="form-group">
-                                  <label>メモ:</label>
-                                  <input type="text" name="title" value={title} className="form-control" onChange={handleInputChange} />
-                                </div>
-                                <div className="form-group">
-                                  <label>カテゴリ:</label>
-                                  <select name="category" valule={category} className="form-control" onChange={handleInputChange}>
-                                    <RenderOptions categories={categories}/>
-                                  </select>
-                                </div>
-                                <div className="form-group">
-                                  <label>金額:</label>
-                                  <input type="text" name="money" value={money} className="form-control" onChange={handleInputChange} />
-                                </div>
-                                <div>
-                                  <button className="btn btn-primary" onClick={handleSubmit}>追加</button> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <React.Fragment>
+    <CssBaseline />
+      <main className={classes.content}>
+        <Container maxWidth="sm" className={classes.container}>
+          <Paper className={classes.paper}>
+            <Title>新規追加</Title>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6}>
+                <FormControl className={classes.formControl}>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="yyyy/MM"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="年月を入力"
+                    value={purchased_at}
+                    onChange={setPurchased_at}
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date',
+                    }}
+                  />
+                </MuiPickersUtilsProvider>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl className={classes.formControl}>
+                  <TextField
+                    required
+                    id="title"
+                    name="title"
+                    label="摘要"
+                    value={title}
+                    onChange={handleInputChange}
+                    fullWidth
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="category">カテゴリ</InputLabel>
+                  <Select
+                    labelId="category"
+                    id="category"
+                    name="category"
+                    valule={category}
+                    onChange={handleInputChange}
+                  >
+                    <MenuItem value=""><em>None</em></MenuItem>
+                    <RenderOptions categories={categories}/>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl className={classes.formControl}>
+                  <TextField
+                    id="money"
+                    name="money"
+                    label="金額"
+                    fullWidth
+                    value={money}
+                    className="form-control"
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl className={classes.formControl}>
+                  <Button variant="contained" color="primary" onClick={handleSubmit}>
+                    追加
+                  </Button>
+                </FormControl>
+              </Grid>
+            </Grid>  
+          </Paper>
+        </Container>
+      </main>
+    </React.Fragment>
   );
 };
 

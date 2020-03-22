@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter} from 'react-router-dom';
 import axios from 'axios';
-import RenderOptions from './RenderOptions';
+import { makeStyles } from '@material-ui/core/styles';
 
 
 const SignUp = (props) => {
@@ -45,36 +45,103 @@ const SignUp = (props) => {
       });
   };
   
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+  
+  const classes = useStyles();
+  
   return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-10">
-                    <div className="card mt-3">
-                        <div className="card-header">SignUp
-                        </div>
-                        <div className="card-body">
-                            <div className="w-50">
-                                <div className="form-group">
-                                  <label>名前:</label>
-                                  <input type="text" name="name" value={name} className="form-control" onChange={handleInputChange} />
-                                </div>
-                                <div className="form-group">
-                                  <label>email:</label>
-                                  <input type="text" name="email" value={email} className="form-control" onChange={handleInputChange} />
-                                </div>
-                                <div className="form-group">
-                                  <label>パスワード:</label>
-                                  <input type="text" name="password" value={password} className="form-control" onChange={handleInputChange} />
-                                </div>
-                                <div>
-                                  <button className="btn btn-primary" onClick={handleSubmit}>追加</button> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="standard"
+                margin="normal"
+                required
+                fullWidth
+                id="name"
+                label="Email Address"
+                name="name"
+                autoComplete="name"
+                autoFocus
+                value={name}
+                onChange={handleInputChange}
+              />
+              <TextField
+                variant="standard"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                value={email}
+                onChange={handleInputChange}
+              />
+              <TextField
+                variant="standard"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={handleInputChange}
+              />
+              {/* エラー時に表示 */}
+              { error !== '' ? <p className="text-danger">{error}</p> : null}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={handleSubmit}
+              >
+                Sign Up
+              </Button>
+              <Grid container>
+                <Grid item>
+                  <Link to="/signin" variant="body2">
+                    {"Already have an account? Sign in"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </form>
+          </div>
+          {/* <Box mt={8}>
+            <Copyright />
+          </Box> */}
+        </Container>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import {Bar} from 'react-chartjs-2';
+import {Line} from 'react-chartjs-2';
 import axios from 'axios';
+import Title from './Title';
 
 const BarChart = (props) => {
   const [chartData, setChartData] = useState({});
@@ -21,12 +22,6 @@ const BarChart = (props) => {
         labels.push(expense.purchased_at);
         data.push(expense.money);
       });
-      // .catch(error => {
-      //   console.log(error);
-      //   const status = error.response.status;
-      //   if (status === 401 && props.isAuthenticated) {
-      //       props.refresh();
-      //   }});
       
       setChartData({
           labels:labels,
@@ -46,11 +41,16 @@ const BarChart = (props) => {
     });
   };
   
+  const options= {
+    maintainAspectRatio: false,
+    responsive: true
+  };
+  
   
   return (
     <React.Fragment>
-        <h2>支出の推移</h2>
-        <Bar data={chartData} height={100} />
+      <Title>支出の推移</Title>
+      <Line data={chartData} options={options} />
     </React.Fragment>
   );
 };

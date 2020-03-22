@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 import axios from 'axios';
+
 
 const RenderRows = (props) => {
     const handleDelete = (e) => {
@@ -19,13 +22,13 @@ const RenderRows = (props) => {
 
     return props.expenses.map(expense => {
         return (
-            <tr key={expense.id}>
-                <td>{expense.purchased_at}</td>
-                <td>{expense.title}</td>
-                <td>{expense.money}</td>
-                <td><button className="btn btn-primary"><Link style={styles.Link} to={'/edit/' + expense.id}>編集</Link></button></td>
-                <td><button className="btn btn-danger" name={expense.id} onClick={handleDelete}>削除</button></td>
-            </tr>
+            <TableRow key={expense.id}>
+                <TableCell>{expense.purchased_at}</TableCell>
+                <TableCell>{expense.title}</TableCell>
+                <TableCell>{expense.money}</TableCell>
+                <TableCell><button className="btn btn-primary"><Link style={styles.Link} to={'/edit/' + expense.id}>編集</Link></button></TableCell>
+                <TableCell><button className="btn btn-danger" name={expense.id} onClick={handleDelete}>削除</button></TableCell>
+            </TableRow>
         );
     });
 };
