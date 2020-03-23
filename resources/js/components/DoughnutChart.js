@@ -13,15 +13,15 @@ const DoughnutChart = (props) => {
   
   const getChartData = () => {
     axios
-      .get("/api/getChartData", {
+      .get("/api/getCategoryCount", {
                 headers: { 'Authorization': 'Bearer ' + props.token }})
       .then(res => {
         const expenses = res.data;
         let labels = [];
         let data = [];
         expenses.forEach(expense => {
-        labels.push(expense.purchased_at);
-        data.push(expense.money);
+        labels.push(expense.name);
+        data.push(expense.count);
       });
       
       setChartData({

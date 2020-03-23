@@ -100,7 +100,10 @@ const useStyles = makeStyles(theme => ({
   },
   textAlignCenter: {
     textAlign: 'center',
-  }
+  },
+  datePickerMargin: {
+    margin: theme.spacing(1),
+  },
 }));
 
 const Default = (props) => {
