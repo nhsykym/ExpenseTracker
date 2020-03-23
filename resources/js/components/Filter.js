@@ -1,6 +1,28 @@
 import React, { useState, useEffect }from 'react';
-import RenderOptions from './RenderOptions';
 import axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+import ja from 'date-fns/locale/ja';
+import Title from './Title';
+
+const useStyles = makeStyles(theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
 
 const Filter = (props) => {
   //年月をyyyy-mm形式で取得
@@ -11,13 +33,15 @@ const Filter = (props) => {
     return thisYear + "-" + thisMonth;
   };
   
-  const [yearMonth, setYearMonth] = useState(getThisMonth());
+  const [yearMonth, setYearMonth] = useState(new Date());
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [moneyFrom, setMoneyFrom] = useState('');
   const [moneyTo, setMoneyTo] = useState('');
-  const [money, setMoney] = useState({min: '1', max: ''});
+  const [money, setMoney] = useState({min: '', max: ''});
   const [error, setError] = useState('');
+  
+  const classes = useStyles();
   
   useEffect(() => {
     const token = props.token;
@@ -44,9 +68,9 @@ const Filter = (props) => {
     }
   });
   
-  const handleMonthChange = (event) => {
-    const inputMonth = event.target.value;
-    setYearMonth(inputMonth);
+  const handleMonthChange = date => {
+    console.log(date);
+    setYearMonth(date);
   };
   
   const handleCategoryChange = (event) => {
@@ -86,41 +110,67 @@ const Filter = (props) => {
         console.log(error);
       });
   };
+  
+  const renderOptions = () => {
+    return categories.map((category, index) => {
+      return <MenuItem key={index} value={category.id}>{category.name}</MenuItem>;
+    });
+  };
  
   return (
-      <div className="card mt-3">
-          <div className="card-header">フィルター
-          </div>
-          <div className="card-body d-flex">
-            <form className="form-inline">
-              <div className="form-group">
-                <label>日付:</label>
-                <div className="mx-2">
-                  <input type="month" id="purchased_at" value={yearMonth} onChange={handleMonthChange} className="form-control" />
-                </div>
-              </div>
-              <div className="form-group">
-                <label>カテゴリ: </label>
-                <div className="mx-2">
-                  <select className="form-control" valule={selectedCategory} onChange={handleCategoryChange}>
-                    <option value="default">未選択</option>
-                    <RenderOptions categories={categories}/>
-                  </select>
-                </div>
-              </div>
-              <div className="form-group">
-                <label>金額:</label>
-                <div className="mx-2">
-                  <input type="text" name="min" value={money.min} onChange={handleMoneyChange} className="form-control form-inline" />
-                  ~
-                  <input type="text" name="max" value={money.from} onChange={handleMoneyChange} className="form-control form-inline" />
-                </div>
-              </div>
-            </form>
-            <button type="button" className="btn btn-primary" onClick={handleSubmit}>絞り込み</button>
-            { error !== '' ? <p>{error}</p> : ''}
-          </div>
-      </div>
+      <React.Fragment>
+          <Title>絞り込み</Title>
+          <Grid container justify="space-around">
+            {/* 日付 */}
+            <Grid item xs={6} sm={2}>
+              <FormControl className={classes.formControl}>
+                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ja}>
+                  <DatePicker
+                    views={["year", "month"]}
+                    label="年月"
+                    format="yyyy年MM月"
+                    value={yearMonth}
+                    onChange={handleMonthChange}
+                  />
+                </MuiPickersUtilsProvider>
+              </FormControl>
+            </Grid>
+            {/* カテゴリ */}
+            <Grid item xs={6} sm={2}>
+              <FormControl className={classes.formControl}>
+              <InputLabel id="category">カテゴリ</InputLabel>
+              <Select
+                labelId="category"
+                id="category"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+              >
+                <MenuItem value=""><em>None</em></MenuItem>
+                {renderOptions()}
+              </Select>
+            </FormControl>
+            </Grid>
+            {/* 金額 */}
+            <Grid item xs={6} sm={2}>
+              <FormControl className={classes.formControl}>
+                <TextField id="standard-search" label="Min" name="min" value={money.min} onChange={handleMoneyChange} type="search" />
+              </FormControl>
+            </Grid>
+            <Grid item xs={6} sm={2}>
+              <FormControl className={classes.formControl}>
+                <TextField id="standard-search" label="Max" name="max" value={money.from} onChange={handleMoneyChange} type="search" />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={2}>
+              <FormControl className={classes.formControl}>
+                <Button variant="contained" color="primary" onClick={handleSubmit}>
+                  検索
+                </Button>
+                { error !== '' ? <p>{error}</p> : ''}
+              </FormControl>
+            </Grid>
+          </Grid>
+      </React.Fragment>
     );
 };
 

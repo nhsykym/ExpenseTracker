@@ -1,8 +1,13 @@
 import React, { useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Table from './Table';
-import BarChart from './BarChart';
+import Expenses from './Expenses';
+import LineChart from './LineChart';
+import DoughnutChart from './DoughnutChart';
+import clsx from 'clsx';
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 
 const Dashboard= (props) => {
@@ -27,25 +32,43 @@ const Dashboard= (props) => {
             });
     }, []);
     
+    //style
+    const classes = props.useStyles();
+    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+    
+    
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-12">
-                    <div className="card mt-3">
-                        <div className="card-header">Overview</div>
-                        <div className="card-body d-flex">
-                            <div className="w-50">
-                                <BarChart refresh={props.refresh} isAuthenticated={props.isAuthenticated} token={props.token}/>
-                            </div>
-                            <div className="w-50">
-                                <BarChart token={props.token}/>
-                            </div>
-                        </div>
-                    </div>
-                    <Table header="最近の収支" expenses={expenses} updateTable={updateTable}/>
-                </div>
-            </div>
-        </div>
+        <React.Fragment>
+        <main className={classes.content}>
+            <Container maxWidth="md" className={classes.container}>
+              <Grid container spacing={3}>
+                {/* 折れ線グラフ */}
+                <Grid item xs={12} md={8}>
+                  <Paper className={fixedHeightPaper}>
+                    {/* <div style={{height:200+"px"}}> */}
+                      <LineChart refresh={props.refresh} isAuthenticated={props.isAuthenticated} token={props.token} />
+                    {/* </div> */}
+                  </Paper>
+                </Grid>
+                {/* カテゴリ比率 */}
+                <Grid item xs={12} md={4}>
+                  <Paper className={fixedHeightPaper}>
+                    <DoughnutChart refresh={props.refresh} isAuthenticated={props.isAuthenticated} token={props.token} />
+                  </Paper>
+                </Grid>
+                {/* 最近の出費 */}
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <Expenses expenses={expenses} updateTable={updateTable}/>
+                  </Paper>
+                </Grid>
+              </Grid>
+              {/* <Box pt={4}>
+                <Copyright />
+              </Box> */}
+            </Container>
+        </main>
+        </React.Fragment>
     );
 };
 

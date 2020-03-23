@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, Switch, Route } from 'react-router-dom';
-
+import CSSBaseline from '@material-ui/core/CssBaseline';
 
 import Default from './components/Default';
 
 const App = () => {
     return (
-        <Default />
+        <React.Fragment>
+            <CSSBaseline />
+            <Default />
+        </React.Fragment>
     );
     
 };

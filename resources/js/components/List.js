@@ -1,11 +1,17 @@
 import React, { useState, useEffect} from 'react';
 import RenderRows from './RenderRows';
 import axios from 'axios';
-import Table from './Table';
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import clsx from 'clsx';
+import Expenses from './Expenses';
 import Filter from './Filter';
 
 const List = (props) => {
     const [expenses, setExpenses] = useState([]);
+    const classes = props.useStyles();
+    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     const updateTable = (result) => {
         setExpenses(result);
@@ -27,14 +33,24 @@ const List = (props) => {
     }, []);
 
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-10">
-                    <Filter token={props.token} isAuthenticated={props.isAuthenticated} refresh={props.refresh} updateTable={updateTable}/>
-                    <Table header="収支の一覧" expenses={expenses} updateTable={updateTable}/>
-                </div>
-            </div>
-        </div>
+        <React.Fragment>
+        <main className={classes.content}>
+            <Container maxWidth="md" className={classes.container}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <Paper className={classes.paper}>
+                            <Filter token={props.token} isAuthenticated={props.isAuthenticated} refresh={props.refresh} updateTable={updateTable} useStyles={props.useStyles}/>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Paper className={fixedHeightPaper}>
+                            <Expenses header="収支の一覧" expenses={expenses} updateTable={updateTable}/>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </Container>
+        </main>
+        </React.Fragment>
     );
 };
 

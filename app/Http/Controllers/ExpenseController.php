@@ -20,12 +20,22 @@ class ExpenseController extends Controller
     
     public function getChartData()
     {
-        $expenses = DB::table('expenses')
+        $result = DB::table('expenses')
             ->selectRaw('purchased_at, sum(money) as money')
             ->groupBy('purchased_at')
             ->get();
-        // Log::debug('$expenses="' .$expenses. '"');
-        return $expenses;
+        return $result;
+    }
+    
+    public function getCategoryCount()
+    {
+        $result = DB::table('expenses')
+            ->join('categories', 'expenses.category_id', '=', 'categories.id')
+            ->selectRaw('categories.id, categories.name as name, count(*) as count')
+            ->groupBy('category_id')
+            ->get();
+        Log::debug($result);
+        return $result;
     }
     
     public function getUsedCategories()
@@ -47,7 +57,7 @@ class ExpenseController extends Controller
     }
     
     public function getFiltered(Request $request) {
-        $yearMonth = $request->yearMonth;
+        $yearMonth = substr($request->yearMonth, 0, 7);
         $category = $request->category;
         $moneyFrom = $request->moneyFrom;
         $moneyTo = $request->moneyTo;
@@ -92,6 +102,7 @@ class ExpenseController extends Controller
         $expense->money = $request->money;
         $expense->category_id = $request->category;
         $expense->user_id = 1;
+        Log::debug($expense);
         $expense->save();
         return;
     }
