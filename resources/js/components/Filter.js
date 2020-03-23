@@ -122,7 +122,7 @@ const Filter = (props) => {
           <Title>絞り込み</Title>
           <Grid container justify="space-around">
             {/* 日付 */}
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={6} sm={2}>
               <FormControl className={classes.formControl}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ja}>
                   <DatePicker
@@ -136,7 +136,7 @@ const Filter = (props) => {
               </FormControl>
             </Grid>
             {/* カテゴリ */}
-            <Grid item xs={12} sm={2}>
+            <Grid item xs={6} sm={2}>
               <FormControl className={classes.formControl}>
               <InputLabel id="category">カテゴリ</InputLabel>
               <Select
@@ -151,12 +151,12 @@ const Filter = (props) => {
             </FormControl>
             </Grid>
             {/* 金額 */}
-            <Grid item xs={12} sm={2}>
+            <Grid item xs={6} sm={2}>
               <FormControl className={classes.formControl}>
                 <TextField id="standard-search" label="Min" name="min" value={money.min} onChange={handleMoneyChange} type="search" />
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={2}>
+            <Grid item xs={6} sm={2}>
               <FormControl className={classes.formControl}>
                 <TextField id="standard-search" label="Max" name="max" value={money.from} onChange={handleMoneyChange} type="search" />
               </FormControl>
