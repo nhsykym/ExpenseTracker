@@ -12,10 +12,13 @@ class ExpenseController extends Controller
 {
     public function getExpenses(Request $request)
     {
-        // $limit = $request->input('limit');
-        $expenses = Expense::orderBy('purchased_at', 'DESC')->get();
-        // Log::debug($expenses);
-        return $expenses;
+        $result = DB::table('expenses')
+            ->join('categories', 'expenses.category_id', '=', 'categories.id')
+            ->selectRaw('expenses.purchased_at, expenses.title, expenses.money, categories.name')
+            ->orderBy('purchased_at', 'DESC')
+            ->get();
+        Log::debug($result);
+        return $result;
     }
     
     public function getChartData()

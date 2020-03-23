@@ -27,8 +27,9 @@ const RenderRows = (props) => {
                 <TableCell>{expense.purchased_at}</TableCell>
                 <TableCell>{expense.title}</TableCell>
                 <TableCell>{expense.money}</TableCell>
+                <TableCell>{expense.name}</TableCell>
                 <TableCell><button className="btn btn-primary"><Link style={styles.Link} to={'/edit/' + expense.id}>編集</Link></button></TableCell>
-                <TableCell><button className="btn btn-danger" name={expense.id} onClick={handleDelete}>削除</button></TableCell>
+                {/* <TableCell><button className="btn btn-danger" name={expense.id} onClick={handleDelete}>削除</button></TableCell> */}
             </TableRow>
         );
     });
