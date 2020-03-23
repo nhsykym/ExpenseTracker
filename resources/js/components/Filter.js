@@ -1,5 +1,4 @@
 import React, { useState, useEffect }from 'react';
-import RenderOptions from './RenderOptions';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -9,8 +8,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import ja from 'date-fns/locale/ja';
 import Title from './Title';
 
 const useStyles = makeStyles(theme => ({
@@ -33,7 +33,7 @@ const Filter = (props) => {
     return thisYear + "-" + thisMonth;
   };
   
-  const [yearMonth, setYearMonth] = useState(new Date('2014-08-18T21:11:54'));
+  const [yearMonth, setYearMonth] = useState(new Date());
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [moneyFrom, setMoneyFrom] = useState('');
@@ -110,27 +110,27 @@ const Filter = (props) => {
         console.log(error);
       });
   };
+  
+  const renderOptions = () => {
+    return categories.map((category, index) => {
+      return <MenuItem key={index} value={category.id}>{category.name}</MenuItem>;
+    });
+  };
  
   return (
       <React.Fragment>
-          <Title>Recent Orders</Title>
+          <Title>絞り込み</Title>
           <Grid container justify="space-around">
             {/* 日付 */}
             <Grid item xs={12} sm={3}>
               <FormControl className={classes.formControl}>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="yyyy/MM"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="年月を入力"
+                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ja}>
+                  <DatePicker
+                    views={["year", "month"]}
+                    label="年月"
+                    format="yyyy年MM月"
                     value={yearMonth}
                     onChange={handleMonthChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date',
-                    }}
                   />
                 </MuiPickersUtilsProvider>
               </FormControl>
@@ -146,7 +146,7 @@ const Filter = (props) => {
                 onChange={handleCategoryChange}
               >
                 <MenuItem value=""><em>None</em></MenuItem>
-                <RenderOptions categories={categories}/>
+                {renderOptions()}
               </Select>
             </FormControl>
             </Grid>

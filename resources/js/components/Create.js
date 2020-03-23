@@ -3,7 +3,6 @@ import { withRouter} from 'react-router-dom';
 import axios from 'axios';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -13,7 +12,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import RenderOptions from './RenderOptions';
 import Title from './Title';
 
 
@@ -76,8 +74,9 @@ const Create = (props) => {
     const token = props.token;
     axios
       .post('/api/add', {
-        data,
-        headers: {'Authorization': 'Bearer ' + token}})
+        headers: { 'Authorization': 'Bearer ' + token },
+        data
+      })
       .then(res => {
         props.history.push("/list");
       })
@@ -88,6 +87,12 @@ const Create = (props) => {
   
   const classes = props.useStyles();
   
+  const renderOptions = () => {
+    return categories.map((category, index) => {
+      return <MenuItem key={index} value={category.id}>{category.name}</MenuItem>;
+    });
+  };
+  
   return (
     <React.Fragment>
     <CssBaseline />
@@ -97,7 +102,7 @@ const Create = (props) => {
             <Title>新規追加</Title>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
-                format="yyyy/MM/dd"
+                format="yyyy-MM-dd"
                 margin="normal"
                 id="date-picker-inline"
                 label="年月を入力"
@@ -127,7 +132,7 @@ const Create = (props) => {
                 value={category}
                 onChange={handleCategoryChange}
               >
-               <RenderOptions categories={categories} />
+               {renderOptions()}
               </Select>
             </FormControl>
             <FormControl className={classes.formControl}>

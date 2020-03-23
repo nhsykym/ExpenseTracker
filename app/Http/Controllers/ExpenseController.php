@@ -47,7 +47,7 @@ class ExpenseController extends Controller
     }
     
     public function getFiltered(Request $request) {
-        $yearMonth = $request->yearMonth;
+        $yearMonth = substr($request->yearMonth, 0, 7);
         $category = $request->category;
         $moneyFrom = $request->moneyFrom;
         $moneyTo = $request->moneyTo;
