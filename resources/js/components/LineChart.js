@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Line} from 'react-chartjs-2';
 import axios from 'axios';
 import Title from './Title';
+import { brewer } from 'chartjs-plugin-colorschemes';
 
 const LineChart = (props) => {
   const [chartData, setChartData] = useState({});
@@ -29,11 +30,7 @@ const LineChart = (props) => {
             {
               label: "金額",
               data: data,
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.6)",
-                "rgba(54, 162, 235, 0.6)",
-                "rgba(255, 99, 132, 0.6)"
-              ],
+              fill: false,
             }
           ]
         }
@@ -43,13 +40,20 @@ const LineChart = (props) => {
   
   const options= {
     maintainAspectRatio: false,
+     plugin: {
+      colorschemes: {
+        scheme: 'brewr.Paired12'
+      }
+    }
   };
   
   
   return (
     <React.Fragment>
       <Title>支出の推移</Title>
-      <Line data={chartData} options={options}/>
+      <div style={{height: 200 + "px"}}>
+        <Line data={chartData} options={options}/>
+      </div>
     </React.Fragment>
     
   );

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Expenses from './Expenses';
 import LineChart from './LineChart';
+import DoughnutChart from './DoughnutChart';
 import clsx from 'clsx';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
@@ -44,9 +45,9 @@ const Dashboard= (props) => {
                 {/* 折れ線グラフ */}
                 <Grid item xs={12} md={8} lg={9}>
                   <Paper className={fixedHeightPaper}>
-                    <div style={{height:200+"px"}}>
+                    {/* <div style={{height:200+"px"}}> */}
                       <LineChart refresh={props.refresh} isAuthenticated={props.isAuthenticated} token={props.token} />
-                    </div>
+                    {/* </div> */}
                   </Paper>
                 </Grid>
                 {/* カテゴリ比率 */}

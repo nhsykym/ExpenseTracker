@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {Line} from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import axios from 'axios';
 import Title from './Title';
+import { brewer } from 'chartjs-plugin-colorschemes';
 
 const DoughnutChart = (props) => {
   const [chartData, setChartData] = useState({});
@@ -27,13 +28,9 @@ const DoughnutChart = (props) => {
           labels:labels,
           datasets: [
             {
-              label: "金額",
+              label: labels,
               data: data,
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.6)",
-                "rgba(54, 162, 235, 0.6)",
-                "rgba(255, 99, 132, 0.6)"
-              ],
+              fill: false,
             }
           ]
         }
@@ -41,16 +38,22 @@ const DoughnutChart = (props) => {
     });
   };
   
-  const options= {
+  const options = {
     maintainAspectRatio: false,
+    plugin: {
+      colorschemes: {
+        scheme: 'brewr.Paired12'
+      }
+    }
   };
   
-  
   return (
-    <div>
-      <Title>支出の推移</Title>
-      <Line data={chartData} options={options} height={200}/>
-    </div>
+    <React.Fragment>
+      <Title>カテゴリの分類</Title>
+      <div style={{height: 200 + "px"}}>
+        <Doughnut data={chartData} options={options}/>
+      </div>
+    </React.Fragment>
   );
 };
 

@@ -30,6 +30,7 @@
         "@material-ui/icons": "^4.9.1",
         "@material-ui/pickers": "^3.2.10",
         "chart.js": "^2.9.3",
+        "chartjs-plugin-colorschemes": "^0.4.0",
         "date-fns": "^2.11.0",
         "react-chartjs-2": "^2.9.0",
         "react-router-dom": "^5.1.2"
