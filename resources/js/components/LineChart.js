@@ -49,8 +49,9 @@ const LineChart = (props) => {
   return (
     <React.Fragment>
       <Title>支出の推移</Title>
-      <Line data={chartData} options={options} height={150}/>
+      <Line data={chartData} options={options}/>
     </React.Fragment>
+    
   );
 };
 

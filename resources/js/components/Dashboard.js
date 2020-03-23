@@ -41,19 +41,20 @@ const Dashboard= (props) => {
         <main className={classes.content}>
             <Container maxWidth="md" className={classes.container}>
               <Grid container spacing={3}>
-                {/* Line Chart */}
-                {/* <Grid item xs={12} md={8} lg={9}> */}
-                <Grid item xs={12}>
+                {/* 折れ線グラフ */}
+                <Grid item xs={12} md={8} lg={9}>
                   <Paper className={fixedHeightPaper}>
-                    <LineChart refresh={props.refresh} isAuthenticated={props.isAuthenticated} token={props.token}/>
+                    <div style={{height:200+"px"}}>
+                      <LineChart refresh={props.refresh} isAuthenticated={props.isAuthenticated} token={props.token} />
+                    </div>
                   </Paper>
                 </Grid>
-                {/* Recent Deposits */}
-                {/* <Grid item xs={12} md={4} lg={3}>
+                {/* カテゴリ比率 */}
+                <Grid item xs={12} md={4} lg={3}>
                   <Paper className={fixedHeightPaper}>
-                    aaa
+                    <DoughnutChart refresh={props.refresh} isAuthenticated={props.isAuthenticated} token={props.token} />
                   </Paper>
-                </Grid> */}
+                </Grid>
                 {/* 最近の出費 */}
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>
