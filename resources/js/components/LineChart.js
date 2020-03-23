@@ -3,7 +3,7 @@ import {Line} from 'react-chartjs-2';
 import axios from 'axios';
 import Title from './Title';
 
-const BarChart = (props) => {
+const LineChart = (props) => {
   const [chartData, setChartData] = useState({});
   
   useEffect(() => {
@@ -43,16 +43,15 @@ const BarChart = (props) => {
   
   const options= {
     maintainAspectRatio: false,
-    responsive: true
   };
   
   
   return (
     <React.Fragment>
       <Title>支出の推移</Title>
-      <Line data={chartData} options={options} />
+      <Line data={chartData} options={options} height={150}/>
     </React.Fragment>
   );
 };
 
-export default BarChart;
+export default LineChart;

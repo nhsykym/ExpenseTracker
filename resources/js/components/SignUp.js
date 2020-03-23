@@ -1,13 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withRouter} from 'react-router-dom';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
 
 const SignUp = (props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   
   const handleInputChange = (e) => {
     switch(e.target.name) {
@@ -27,6 +37,7 @@ const SignUp = (props) => {
   
   const handleSubmit = () => {
     if({name} == '' && {email} == '' && {password} == ''){
+      setError("全てのフォームを入力して下さい");
       return;
     }
     
@@ -84,7 +95,7 @@ const SignUp = (props) => {
                 required
                 fullWidth
                 id="name"
-                label="Email Address"
+                label="Name"
                 name="name"
                 autoComplete="name"
                 autoFocus

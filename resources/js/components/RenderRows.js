@@ -9,7 +9,8 @@ const RenderRows = (props) => {
     const handleDelete = (e) => {
         axios
             .post('/api/delete', {
-                id: e.target.name
+                id: e.target.name,
+                headers: { 'Authorization': 'Bearer ' + props.token }
             })
             .then(res => {
                 props.updateTable(res.data);

@@ -113231,82 +113231,6 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
-/***/ "./resources/js/components/BarChart.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/BarChart.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Title__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Title */ "./resources/js/components/Title.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-var BarChart = function BarChart(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
-      _useState2 = _slicedToArray(_useState, 2),
-      chartData = _useState2[0],
-      setChartData = _useState2[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    getChartData();
-  }, []);
-
-  var getChartData = function getChartData() {
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/getChartData", {
-      headers: {
-        'Authorization': 'Bearer ' + props.token
-      }
-    }).then(function (res) {
-      var expenses = res.data;
-      var labels = [];
-      var data = [];
-      expenses.forEach(function (expense) {
-        labels.push(expense.purchased_at);
-        data.push(expense.money);
-      });
-      setChartData({
-        labels: labels,
-        datasets: [{
-          label: "金額",
-          data: data,
-          backgroundColor: ["rgba(255, 99, 132, 0.6)", "rgba(54, 162, 235, 0.6)", "rgba(255, 99, 132, 0.6)"]
-        }]
-      });
-    });
-  };
-
-  var options = {
-    maintainAspectRatio: false,
-    responsive: true
-  };
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Title__WEBPACK_IMPORTED_MODULE_3__["default"], null, "\u652F\u51FA\u306E\u63A8\u79FB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_1__["Line"], {
-    data: chartData,
-    options: options
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (BarChart);
-
-/***/ }),
-
 /***/ "./resources/js/components/Create.js":
 /*!*******************************************!*\
   !*** ./resources/js/components/Create.js ***!
@@ -113568,7 +113492,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Expenses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Expenses */ "./resources/js/components/Expenses.js");
-/* harmony import */ var _BarChart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./BarChart */ "./resources/js/components/BarChart.js");
+/* harmony import */ var _LineChart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./LineChart */ "./resources/js/components/LineChart.js");
 /* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
 /* harmony import */ var _material_ui_core_Container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Container */ "./node_modules/@material-ui/core/esm/Container/index.js");
 /* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
@@ -113631,29 +113555,19 @@ var Dashboard = function Dashboard(props) {
     spacing: 3
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
     item: true,
-    xs: 12,
-    md: 8,
-    lg: 9
+    xs: 12
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    className: classes.paper
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    className: fixedHeightPaper
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LineChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
     refresh: props.refresh,
     isAuthenticated: props.isAuthenticated,
     token: props.token
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
     item: true,
-    xs: 12,
-    md: 4,
-    lg: 3
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    className: fixedHeightPaper
-  }, "aaa")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    item: true,
     xs: 12
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_7__["default"], {
     className: classes.paper
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Expenses__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    header: "\u6700\u8FD1\u306E\u53CE\u652F",
     expenses: expenses,
     updateTable: updateTable
   })))))));
@@ -113970,7 +113884,11 @@ var Edit = function Edit(props) {
       setMoney = _useState6[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/edit/' + props.match.params.id).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/edit/' + props.match.params.id, {
+      headers: {
+        'Authorization': 'Bearer ' + props.token
+      }
+    }).then(function (res) {
       //expensesを更新（描画がかかる）
       setPurchased_at(res.data.purchased_at);
       setTitle(res.data.title);
@@ -114098,13 +114016,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(function (theme) {
-  return {
-    seeMore: {
-      marginTop: theme.spacing(3)
-    }
-  };
-});
 
 var Expenses = function Expenses(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Title__WEBPACK_IMPORTED_MODULE_8__["default"], null, "\u6700\u8FD1\u306E\u652F\u51FA"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -114490,6 +114401,82 @@ var Home = function Home(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/LineChart.js":
+/*!**********************************************!*\
+  !*** ./resources/js/components/LineChart.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Title__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Title */ "./resources/js/components/Title.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+var LineChart = function LineChart(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      chartData = _useState2[0],
+      setChartData = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    getChartData();
+  }, []);
+
+  var getChartData = function getChartData() {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/getChartData", {
+      headers: {
+        'Authorization': 'Bearer ' + props.token
+      }
+    }).then(function (res) {
+      var expenses = res.data;
+      var labels = [];
+      var data = [];
+      expenses.forEach(function (expense) {
+        labels.push(expense.purchased_at);
+        data.push(expense.money);
+      });
+      setChartData({
+        labels: labels,
+        datasets: [{
+          label: "金額",
+          data: data,
+          backgroundColor: ["rgba(255, 99, 132, 0.6)", "rgba(54, 162, 235, 0.6)", "rgba(255, 99, 132, 0.6)"]
+        }]
+      });
+    });
+  };
+
+  var options = {
+    maintainAspectRatio: false
+  };
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Title__WEBPACK_IMPORTED_MODULE_3__["default"], null, "\u652F\u51FA\u306E\u63A8\u79FB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_1__["Line"], {
+    data: chartData,
+    options: options,
+    height: 150
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (LineChart);
+
+/***/ }),
+
 /***/ "./resources/js/components/List.js":
 /*!*****************************************!*\
   !*** ./resources/js/components/List.js ***!
@@ -114644,7 +114631,10 @@ __webpack_require__.r(__webpack_exports__);
 var RenderRows = function RenderRows(props) {
   var handleDelete = function handleDelete(e) {
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/delete', {
-      id: e.target.name
+      id: e.target.name,
+      headers: {
+        'Authorization': 'Bearer ' + props.token
+      }
     }).then(function (res) {
       props.updateTable(res.data);
       console.log('deleted');
@@ -114891,6 +114881,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Avatar */ "./node_modules/@material-ui/core/esm/Avatar/index.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/CssBaseline */ "./node_modules/@material-ui/core/esm/CssBaseline/index.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+/* harmony import */ var _material_ui_icons_LockOutlined__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/icons/LockOutlined */ "./node_modules/@material-ui/icons/LockOutlined.js");
+/* harmony import */ var _material_ui_icons_LockOutlined__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_LockOutlined__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var _material_ui_core_Container__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Container */ "./node_modules/@material-ui/core/esm/Container/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -114898,6 +114897,15 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -114919,6 +114927,11 @@ var SignUp = function SignUp(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       password = _useState6[0],
       setPassword = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      error = _useState8[0],
+      setError = _useState8[1];
 
   var handleInputChange = function handleInputChange(e) {
     switch (e.target.name) {
@@ -114947,6 +114960,7 @@ var SignUp = function SignUp(props) {
     } == '' && {
       password: password
     } == '') {
+      setError("全てのフォームを入力して下さい");
       return;
     }
 
@@ -114985,32 +114999,32 @@ var SignUp = function SignUp(props) {
     };
   });
   var classes = useStyles();
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Container__WEBPACK_IMPORTED_MODULE_11__["default"], {
     component: "main",
     maxWidth: "xs"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CssBaseline, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.paper
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Avatar, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_4__["default"], {
     className: classes.avatar
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LockOutlinedIcon, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Typography, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_LockOutlined__WEBPACK_IMPORTED_MODULE_9___default.a, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_10__["default"], {
     component: "h1",
     variant: "h5"
   }, "Sign in"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: classes.form,
     noValidate: true
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TextField, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_7__["default"], {
     variant: "standard",
     margin: "normal",
     required: true,
     fullWidth: true,
     id: "name",
-    label: "Email Address",
+    label: "Name",
     name: "name",
     autoComplete: "name",
     autoFocus: true,
     value: name,
     onChange: handleInputChange
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TextField, {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_7__["default"], {
     variant: "standard",
     margin: "normal",
     required: true,
@@ -115022,7 +115036,7 @@ var SignUp = function SignUp(props) {
     autoFocus: true,
     value: email,
     onChange: handleInputChange
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TextField, {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_7__["default"], {
     variant: "standard",
     margin: "normal",
     required: true,
@@ -115036,18 +115050,18 @@ var SignUp = function SignUp(props) {
     onChange: handleInputChange
   }), error !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "text-danger"
-  }, error) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Button, {
+  }, error) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
     type: "submit",
     fullWidth: true,
     variant: "contained",
     color: "primary",
     className: classes.submit,
     onClick: handleSubmit
-  }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Grid, {
+  }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
     container: true
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Grid, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
     item: true
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Link, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/signin",
     variant: "body2"
   }, "Already have an account? Sign in"))))));

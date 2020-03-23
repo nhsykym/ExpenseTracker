@@ -10,7 +10,8 @@ const Edit = (props) => {
   
   useEffect(() => {
     axios
-        .get('/api/edit/' + props.match.params.id)
+        .get('/api/edit/' + props.match.params.id, {
+          headers: { 'Authorization': 'Bearer ' + props.token }})
         .then((res) => {
             //expensesを更新（描画がかかる）
             setPurchased_at(res.data.purchased_at);
