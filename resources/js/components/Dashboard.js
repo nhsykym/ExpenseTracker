@@ -43,7 +43,7 @@ const Dashboard= (props) => {
             <Container maxWidth="md" className={classes.container}>
               <Grid container spacing={3}>
                 {/* 折れ線グラフ */}
-                <Grid item xs={12} md={8} lg={9}>
+                <Grid item xs={12} md={8}>
                   <Paper className={fixedHeightPaper}>
                     {/* <div style={{height:200+"px"}}> */}
                       <LineChart refresh={props.refresh} isAuthenticated={props.isAuthenticated} token={props.token} />
@@ -51,7 +51,7 @@ const Dashboard= (props) => {
                   </Paper>
                 </Grid>
                 {/* カテゴリ比率 */}
-                <Grid item xs={12} md={4} lg={3}>
+                <Grid item xs={12} md={4}>
                   <Paper className={fixedHeightPaper}>
                     <DoughnutChart refresh={props.refresh} isAuthenticated={props.isAuthenticated} token={props.token} />
                   </Paper>

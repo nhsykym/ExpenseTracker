@@ -98,6 +98,9 @@ const useStyles = makeStyles(theme => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  textAlignCenter: {
+    textAlign: 'center',
+  }
 }));
 
 const Default = (props) => {
@@ -157,7 +160,8 @@ const Default = (props) => {
       <Header isAuthenticated={isAuthenticated} logout={logout}/>
       <Switch>
         {/* 未ログインでもアクセス可能 */}
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" render={
+          (props) => <Home useStyles={useStyles} {...props}/> }  />
         <Route path="/signin" render={
           (props) => <SignIn authenticate={authenticate} isAuthenticated={isAuthenticated} {...props} />} />
         <Route path="/signup" component={SignUp} />

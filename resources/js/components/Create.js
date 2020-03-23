@@ -18,22 +18,16 @@ import Title from './Title';
 
 
 const Create = (props) => {
-  const [purchased_at, setPurchased_at] = useState('');
+  const [purchased_at, setPurchased_at] = useState(new Date());
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState(1);
+  const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]);
   const [money, setMoney] = useState('');
   
   const handleInputChange = (e) => {
     switch(e.target.name) {
-      case 'purchased_at':
-        setPurchased_at(e.target.value);
-        break;
       case 'title':
         setTitle(e.target.value);
-        break;
-      case 'category':
-        setCategory(e.target.value);
         break;
       case 'money':
         setMoney(e.target.value);
@@ -41,6 +35,14 @@ const Create = (props) => {
       default:
         break;
     }
+  };
+  
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
+  
+  const handleDateChange = (date) => {
+    setPurchased_at(date);
   };
   
   useEffect(() => {
@@ -93,75 +95,56 @@ const Create = (props) => {
         <Container maxWidth="sm" className={classes.container}>
           <Paper className={classes.paper}>
             <Title>新規追加</Title>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <FormControl className={classes.formControl}>
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="yyyy/MM"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="年月を入力"
-                    value={purchased_at}
-                    onChange={setPurchased_at}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date',
-                    }}
-                  />
-                </MuiPickersUtilsProvider>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl className={classes.formControl}>
-                  <TextField
-                    required
-                    id="title"
-                    name="title"
-                    label="摘要"
-                    value={title}
-                    onChange={handleInputChange}
-                    fullWidth
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl className={classes.formControl}>
-                  <InputLabel id="category">カテゴリ</InputLabel>
-                  <Select
-                    labelId="category"
-                    id="category"
-                    name="category"
-                    valule={category}
-                    onChange={handleInputChange}
-                  >
-                    <MenuItem value=""><em>None</em></MenuItem>
-                    <RenderOptions categories={categories}/>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl className={classes.formControl}>
-                  <TextField
-                    id="money"
-                    name="money"
-                    label="金額"
-                    fullWidth
-                    value={money}
-                    className="form-control"
-                    onChange={handleInputChange}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl className={classes.formControl}>
-                  <Button variant="contained" color="primary" onClick={handleSubmit}>
-                    追加
-                  </Button>
-                </FormControl>
-              </Grid>
-            </Grid>  
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                format="yyyy/MM/dd"
+                margin="normal"
+                id="date-picker-inline"
+                label="年月を入力"
+                value={purchased_at}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
+            </MuiPickersUtilsProvider>
+            <FormControl className={classes.formControl}>
+              <TextField
+                required
+                id="title"
+                name="title"
+                label="摘要"
+                value={title}
+                onChange={handleInputChange}
+                fullWidth
+              />
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="category">カテゴリ</InputLabel>
+              <Select
+                labelId="category"
+                id="category"
+                value={category}
+                onChange={handleCategoryChange}
+              >
+               <RenderOptions categories={categories} />
+              </Select>
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <TextField
+                id="money"
+                name="money"
+                label="金額"
+                fullWidth
+                value={money}
+                onChange={handleInputChange}
+              />
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <Button variant="contained" color="primary" onClick={handleSubmit}>
+                追加
+              </Button>
+            </FormControl>
           </Paper>
         </Container>
       </main>
