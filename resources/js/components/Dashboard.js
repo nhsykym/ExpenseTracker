@@ -26,11 +26,24 @@ const Dashboard= (props) => {
                 })
             .catch(error => {
                 const status = error.response.status;
-                if (status === 401 && this.props.isAuthenticated) {
-                    props.refresh();
+                if (status === 401 && props.isAuthenticated) {
+                    refresh();
                 }
             });
     }, []);
+    
+    const refresh = () => {
+      axios
+        .get('/api/refreshToken', {
+          headers: {'Authorization': 'bearer ' + props.token}})
+        .then((res) => {
+            const token = res.data.token;
+            props.authenticate(token);
+        })
+        .catch((error) => {
+            console.log('Token refresh error!', error);
+        });
+    };
     
     //style
     const classes = props.useStyles();
@@ -46,14 +59,14 @@ const Dashboard= (props) => {
                 <Grid item xs={12} md={8}>
                   <Paper className={fixedHeightPaper}>
                     {/* <div style={{height:200+"px"}}> */}
-                      <LineChart refresh={props.refresh} isAuthenticated={props.isAuthenticated} token={props.token} />
+                      <LineChart token={props.token} />
                     {/* </div> */}
                   </Paper>
                 </Grid>
                 {/* カテゴリ比率 */}
                 <Grid item xs={12} md={4}>
                   <Paper className={fixedHeightPaper}>
-                    <DoughnutChart refresh={props.refresh} isAuthenticated={props.isAuthenticated} token={props.token} />
+                    <DoughnutChart token={props.token} />
                   </Paper>
                 </Grid>
                 {/* 最近の出費 */}

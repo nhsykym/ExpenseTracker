@@ -37,7 +37,6 @@ class FrontEndUserController extends Controller
     public function refreshToken()
     {
       $token = JWTAuth::getToken();
-      
       try {
           $token = JWTAuth::refresh($token);
           Log::debug('New token: ' . $token);

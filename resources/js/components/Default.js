@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { axios } from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-
 import Header from './Header';
 import Home from './Home';
 import Dashboard from './Dashboard';
@@ -122,28 +121,12 @@ const Default = (props) => {
     localStorage.removeItem('jwt');
   };
   
-  const refresh = () => {
-    return (
-      axios
-      .get('/api/refreshToken', {
-          headers: { 'Authorization': 'Bearer ' + token }
-      })
-      .then((res) => {
-          const token = res.data.token;
-          authenticate(token);
-      })
-      .catch((error) => {
-          console.log('Error!', error);
-      })
-    );
-  };
-  
   useEffect(() => {
     const lsToken = localStorage.getItem('jwt');
     if (lsToken) {
         authenticate(lsToken);
     }
-  })
+  },[]);
   
   const PrivateRoute = ({ component: Component, isAuthenticated, token, ...rest }) => (
     <Route {...rest} render={props => (
@@ -170,10 +153,10 @@ const Default = (props) => {
         <Route path="/signup" component={SignUp} />
         
         {/* ログイン時のみアクセス可能 */}
-        <PrivateRoute exact path='/dashboard' component={Dashboard} isAuthenticated={isAuthenticated} token={token} refresh={refresh} useStyles={useStyles} />
-        <PrivateRoute path="/list" component={List} isAuthenticated={isAuthenticated} token={token} refresh={refresh} useStyles={useStyles} />
-        <PrivateRoute path="/create" component={Create} isAuthenticated={isAuthenticated} token={token} refresh={refresh} useStyles={useStyles} />
-        <PrivateRoute path="/edit/:id" component={Edit} isAuthenticated={isAuthenticated} token={token} refresh={refresh} useStyles={useStyles} />
+        <PrivateRoute exact path='/dashboard' component={Dashboard} isAuthenticated={isAuthenticated} token={token} authenticate={authenticate} useStyles={useStyles} />
+        <PrivateRoute path="/list" component={List} isAuthenticated={isAuthenticated} token={token} authenticate={authenticate} useStyles={useStyles} />
+        <PrivateRoute path="/create" component={Create} isAuthenticated={isAuthenticated} token={token} useStyles={useStyles} />
+        <PrivateRoute path="/edit/:id" component={Edit} isAuthenticated={isAuthenticated} token={token} useStyles={useStyles} />
       </Switch>
     </BrowserRouter>
   );
