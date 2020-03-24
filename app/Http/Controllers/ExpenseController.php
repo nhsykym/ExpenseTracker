@@ -14,7 +14,7 @@ class ExpenseController extends Controller
     {
         $result = DB::table('expenses')
             ->join('categories', 'expenses.category_id', '=', 'categories.id')
-            ->selectRaw('expenses.purchased_at, expenses.title, expenses.money, categories.name')
+            ->selectRaw('expenses.id, expenses.purchased_at, expenses.title, expenses.money, categories.name')
             ->orderBy('purchased_at', 'DESC')
             ->get();
         return $result;
