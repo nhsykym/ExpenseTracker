@@ -12,10 +12,12 @@ class ExpenseController extends Controller
 {
     public function getExpenses(Request $request)
     {
-        // $limit = $request->input('limit');
-        $expenses = Expense::orderBy('purchased_at', 'DESC')->get();
-        // Log::debug($expenses);
-        return $expenses;
+        $result = DB::table('expenses')
+            ->join('categories', 'expenses.category_id', '=', 'categories.id')
+            ->selectRaw('expenses.purchased_at, expenses.title, expenses.money, categories.name')
+            ->orderBy('purchased_at', 'DESC')
+            ->get();
+        return $result;
     }
     
     public function getChartData()
@@ -34,7 +36,6 @@ class ExpenseController extends Controller
             ->selectRaw('categories.id, categories.name as name, count(*) as count')
             ->groupBy('category_id')
             ->get();
-        Log::debug($result);
         return $result;
     }
     
@@ -45,14 +46,12 @@ class ExpenseController extends Controller
                         ->select('categories.id', 'categories.name')
                         ->distinct()
                         ->get();
-        Log::debug($categories);
         return $categories;
     }
     
     public function getCategories()
     {
         $categories = Category::all();
-        Log::debug($categories);
         return $categories;
     }
     
@@ -61,7 +60,6 @@ class ExpenseController extends Controller
         $category = $request->category;
         $moneyFrom = $request->moneyFrom;
         $moneyTo = $request->moneyTo;
-        Log::debug($request->all());
         
         $query = DB::table('expenses');
         
@@ -102,7 +100,6 @@ class ExpenseController extends Controller
         $expense->money = $request->money;
         $expense->category_id = $request->category;
         $expense->user_id = 1;
-        Log::debug($expense);
         $expense->save();
         return;
     }

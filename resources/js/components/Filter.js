@@ -55,7 +55,7 @@ const Filter = (props) => {
         console.log(error);
         const status = error.response.status;
         if (status === 401 && props.isAuthenticated) {
-            props.refresh();
+            //props.refresh();
         }
       });
   }, []);

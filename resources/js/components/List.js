@@ -27,7 +27,8 @@ const List = (props) => {
             .catch(error => {
                 const status = error.response.status;
                 if (status === 401 && props.isAuthenticated) {
-                    props.refresh();
+                    ///props.refresh();
+                    console.log('一度Homeに戻ってください');
                 }
             });
     }, []);
@@ -39,7 +40,7 @@ const List = (props) => {
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <Paper className={classes.paper}>
-                            <Filter token={props.token} isAuthenticated={props.isAuthenticated} refresh={props.refresh} updateTable={updateTable} useStyles={props.useStyles}/>
+                            <Filter token={props.token} isAuthenticated={props.isAuthenticated} updateTable={updateTable} useStyles={props.useStyles}/>
                         </Paper>
                     </Grid>
                     <Grid item xs={12}>
