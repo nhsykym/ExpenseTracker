@@ -29,9 +29,7 @@ const Expenses = (props) => {
             </TableBody>
           </Table>
         </React.Fragment>
-        
     );
-    
 };
 
 

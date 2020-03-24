@@ -28,7 +28,7 @@ const List = (props) => {
                 const status = error.response.status;
                 if (status === 401 && props.isAuthenticated) {
                     ///props.refresh();
-                    console.log('一度Homeに戻ってください');
+                    alert('一度Homeに戻ってください');
                 }
             });
     }, []);

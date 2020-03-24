@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -84,6 +86,24 @@ const Edit = (props) => {
       .catch(error => {
         console.log(error);
       });
+  };
+  
+  const handleDelete = () => {
+    if(confirm('削除していいですか?')) {
+      axios
+        .post('/api/delete', 
+          {id: props.match.params.id},
+          {headers: { 'Authorization': 'Bearer ' + props.token }})
+        .then(res => {
+            console.log('deleted');
+            props.history.push("/list");
+        })
+        .catch(error => {
+            console.log(error);
+      });
+    } else {
+      return;
+    }
   };
   
   useEffect(() => {
@@ -177,10 +197,19 @@ const Edit = (props) => {
                   />
                 </FormControl>
               </Grid>
-              <Grid item xs={12}>
+            </Grid>
+            <Grid container className={classes.textAlignCenter} spacing={3}>
+              <Grid item xs={6}>
                 <FormControl className={classes.formControl}>
-                  <Button variant="contained" color="primary" onClick={handleSubmit}>
+                  <Button variant="contained" color="primary" startIcon={<SaveIcon />} onClick={handleSubmit}>
                     更新
+                  </Button>
+                </FormControl>
+              </Grid>
+              <Grid item xs={6}>
+                <FormControl className={classes.formControl}>
+                  <Button variant="contained" color="secondary" startIcon={<DeleteIcon />} onClick={handleDelete}>
+                    削除
                   </Button>
                 </FormControl>
               </Grid>
