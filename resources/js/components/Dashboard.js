@@ -58,20 +58,18 @@ const Dashboard= (props) => {
                 {/* 折れ線グラフ */}
                 <Grid item xs={12} md={8}>
                   <Paper className={fixedHeightPaper}>
-                    {/* <div style={{height:200+"px"}}> */}
                       <LineChart token={props.token} />
-                    {/* </div> */}
                   </Paper>
                 </Grid>
                 {/* カテゴリ比率 */}
                 <Grid item xs={12} md={4}>
                   <Paper className={fixedHeightPaper}>
                     <DoughnutChart token={props.token} />
-                  </Paper>
+                  </Paper>  
                 </Grid>
-                {/* 最近の出費 */}
+                {/* 最近の出費 */}  
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}>
+                  <Paper className={classes.paper}> 
                     <Expenses expenses={expenses} updateTable={updateTable}/>
                   </Paper>
                 </Grid>
