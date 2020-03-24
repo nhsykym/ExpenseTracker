@@ -26,10 +26,6 @@ const Header = (props) => {
     return (
         <AppBar position="static">
             <Toolbar>
-                <Typography variant="h6" className={classes.title}>
-                    家計簿アプリ
-                </Typography>
-                <React.Fragment>
                 <Button color="inherit">
                     <Link to="/dashboard">Home</Link>
                 </Button>
@@ -49,7 +45,6 @@ const Header = (props) => {
                         <Link to="/signin">Login</Link>
                     </Button>
                 }
-                </React.Fragment>
             </Toolbar>
         </AppBar>
   );
