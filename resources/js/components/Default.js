@@ -108,6 +108,7 @@ const useStyles = makeStyles(theme => ({
 const Default = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState('');
   
   const authenticate = (token) => {
     setIsAuthenticated(true);
@@ -143,13 +144,13 @@ const Default = (props) => {
   
   return (
     <BrowserRouter>
-      <Header isAuthenticated={isAuthenticated} logout={logout}/>
+      <Header isAuthenticated={isAuthenticated} user={user} logout={logout}/>
       <Switch>
         {/* 未ログインでもアクセス可能 */}
         <Route exact path="/" render={
           (props) => <Home useStyles={useStyles} {...props}/> }  />
         <Route path="/signin" render={
-          (props) => <SignIn authenticate={authenticate} isAuthenticated={isAuthenticated} {...props} />} />
+          (props) => <SignIn authenticate={authenticate} isAuthenticated={isAuthenticated} setUser={setUser} {...props} />} />
         <Route path="/signup" component={SignUp} />
         
         {/* ログイン時のみアクセス可能 */}

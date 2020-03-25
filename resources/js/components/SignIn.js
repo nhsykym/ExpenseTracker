@@ -44,7 +44,7 @@ const SignIn = (props) => {
         setError('');
         const token = res.data.token;
         props.authenticate(token);
-        console.log(`state.from: ${JSON.stringify(props.location.state)}`);
+        props.setUser('aa');
       })
       .catch(error => {
         const status = error.response.status;
