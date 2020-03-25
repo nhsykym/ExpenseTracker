@@ -19,21 +19,21 @@ const Expenses = (props) => {
           <Title>最近の支出</Title>
           <Table size="small">
             <TableHead>
-              <TableRow>
-                <TableCell>日付</TableCell>
-                <TableCell>摘要</TableCell>
-                <TableCell>金額</TableCell>
-                {matches ?
-                  <React.Fragment>
-                    <TableCell>カテゴリ</TableCell>
-                    <TableCell align="center">編集</TableCell>
-                  </React.Fragment>
-                :
-                    ''
-                }
-                
-                
-              </TableRow>
+              {matches ?
+                <TableRow>
+                  <TableCell>日付</TableCell>
+                  <TableCell>摘要</TableCell>
+                  <TableCell>金額</TableCell>
+                  <TableCell>カテゴリ</TableCell>
+                  <TableCell align="center">編集</TableCell>
+                </TableRow>
+              :
+                <TableRow>
+                  <TableCell>日付</TableCell>
+                  <TableCell>摘要</TableCell>
+                  <TableCell>金額</TableCell>
+                </TableRow>
+              }
             </TableHead>
             <TableBody>
                 <RenderRows

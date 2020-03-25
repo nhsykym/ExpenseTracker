@@ -16,11 +16,11 @@ const RenderRows = (props) => {
         const trimed_purchased_at = expense.purchased_at.substring(5);
         return (
             <TableRow key={expense.id} onClick={() => handleRowClick(expense.id)}>
-                <TableCell>{expense.purchased_at}</TableCell>
-                <TableCell>{expense.title}</TableCell>
-                <TableCell>{expense.money}</TableCell>
                 {props.matches ? 
                     <React.Fragment>
+                        <TableCell>{expense.purchased_at}</TableCell>
+                        <TableCell>{expense.title}</TableCell>
+                        <TableCell>&yen;{expense.money}</TableCell>
                         <TableCell>{expense.categoryName}</TableCell>
                         <TableCell align="center">
                             <Button color="primary">
@@ -29,9 +29,12 @@ const RenderRows = (props) => {
                         </TableCell>
                     </React.Fragment>
                 :
-                    ''
+                    <React.Fragment>
+                        <TableCell>{trimed_purchased_at}</TableCell>
+                        <TableCell>{expense.title}</TableCell>
+                        <TableCell>&yen;{expense.money}</TableCell>
+                    </React.Fragment>
                 }
-                
             </TableRow>
         );
     });
