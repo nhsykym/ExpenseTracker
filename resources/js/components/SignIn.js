@@ -123,10 +123,6 @@ const SignIn = (props) => {
                     />
                     {/* エラー時に表示 */}
                     { error !== '' ? <p className="text-danger">{error}</p> : null}
-                    <FormControlLabel
-                      control={<Checkbox value="remember" color="primary" />}
-                      label="Remember me"
-                    />
                     <Button
                       type="submit"
                       fullWidth
