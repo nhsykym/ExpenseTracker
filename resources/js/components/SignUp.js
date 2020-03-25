@@ -86,7 +86,7 @@ const SignUp = (props) => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign up
             </Typography>
             <form className={classes.form} noValidate>
               <TextField
@@ -111,7 +111,6 @@ const SignUp = (props) => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                autoFocus
                 value={email}
                 onChange={handleInputChange}
               />

@@ -29,9 +29,15 @@ class FrontEndUserController extends Controller
         return response()->json(['error' => 'could_not_create_token'], 500);
       }
       
-      Log::debug(compact('token'));
-      return response()->json(compact('token'));
       
+      //ログインしたユーザーのidとnameを返す
+      $userInfo = \App\User::where('email', $request->email)->get()->first();
+      $user = [
+        'userId' => $userInfo->id,
+        'userName' => $userInfo->name
+      ];
+      
+      return response()->json(compact('token', 'user'));
     }
     
     public function refreshToken()
