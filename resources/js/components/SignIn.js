@@ -44,6 +44,7 @@ const SignIn = (props) => {
         setError('');
         const token = res.data.token;
         props.authenticate(token);
+        console.log(`state.from: ${JSON.stringify(props.location.state)}`);
       })
       .catch(error => {
         const status = error.response.status;
@@ -82,6 +83,10 @@ const SignIn = (props) => {
           if (props.isAuthenticated && props.location.state !== undefined) {
             return (
               <Redirect to={props.location.state.from} />
+            );
+          } else if(props.isAuthenticated && props.location.state === undefined) {
+            return (
+              <Redirect to={'/dashboard'} />
             );
           } else {
             return (
@@ -123,10 +128,6 @@ const SignIn = (props) => {
                     />
                     {/* エラー時に表示 */}
                     { error !== '' ? <p className="text-danger">{error}</p> : null}
-                    <FormControlLabel
-                      control={<Checkbox value="remember" color="primary" />}
-                      label="Remember me"
-                    />
                     <Button
                       type="submit"
                       fullWidth
