@@ -34,7 +34,7 @@ class ExpenseController extends Controller
         $result = DB::table('expenses')
             ->join('categories', 'expenses.category_id', '=', 'categories.id')
             ->selectRaw('categories.id, categories.name as name, count(*) as count')
-            ->groupBy('category_id')
+            ->groupBy('categories.id')
             ->get();
         return $result;
     }
