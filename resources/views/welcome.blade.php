@@ -11,10 +11,20 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        @if(app('env')=='local')
+            <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        @endif
+        @if(app('env')=='production')
+            <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
+        @endif
     </head>
     <body>
         <div id="app"></div>
-        <script src="{{asset('js/app.js')}}"></script>
+        @if(app('env')=='local')
+            <script src="{{asset('js/app.js')}}"></script>
+        @endif
+        @if(app('env')=='production')
+            <script src="{{secure_asset('js/app.js')}}"></script>
+        @endif
     </body>
 </html>
