@@ -12,6 +12,7 @@ const RenderRows = (props) => {
         props.history.push('/edit/' + id);
     };
     
+    console.log(props.expenses);
     return props.expenses.map(expense => {
         const trimed_purchased_at = expense.purchased_at.substring(5);
         return (
@@ -21,7 +22,7 @@ const RenderRows = (props) => {
                         <TableCell>{expense.purchased_at}</TableCell>
                         <TableCell>{expense.title}</TableCell>
                         <TableCell>&yen;{expense.money}</TableCell>
-                        <TableCell>{expense.categoryName}</TableCell>
+                        <TableCell>{expense.categoryname}</TableCell>
                         <TableCell align="center">
                             <Button color="primary">
                                 <Link to={'/edit/' + expense.id}><EditIcon /></Link>
