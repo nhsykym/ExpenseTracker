@@ -13,7 +13,7 @@ const DoughnutChart = (props) => {
   
   const getChartData = () => {
     axios
-      .get("/api/getCategoryCount", {
+      .get("/api/getCategoryRatio", {
                 headers: { 'Authorization': 'Bearer ' + props.token }})
       .then(res => {
         const expenses = res.data;
@@ -21,8 +21,8 @@ const DoughnutChart = (props) => {
         let data = [];
         expenses.forEach(expense => {
         labels.push(expense.name);
-        data.push(expense.count);
-      });
+        data.push(expense.money);
+      })
       
       setChartData({
           labels:labels,

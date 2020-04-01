@@ -33,7 +33,7 @@ Route::group(['middleware' => 'api'], function(){
     //一覧表示
     Route::get('get', 'ExpenseController@getExpenses');
     Route::get('getChartData', 'ExpenseController@getChartData');
-    Route::get('getCategoryCount', 'ExpenseController@getCategoryCount');
+    Route::get('getCategoryRatio', 'ExpenseController@getCategoryRatio');
     Route::get('usedCategories', 'ExpenseController@getUsedCategories');
     Route::get('getFiltered', 'ExpenseController@getFiltered');
     
@@ -54,7 +54,7 @@ Route::group(['middleware' => 'jwt.auth'], function() {
     //一覧表示
     Route::get('get', 'ExpenseController@getExpenses');
     Route::get('getChartData', 'ExpenseController@getChartData');
-    Route::get('getCategoryCount', 'ExpenseController@getCategoryCount');
+    Route::get('getCategoryRatio', 'ExpenseController@getCategoryRatio');
     Route::get('usedCategories', 'ExpenseController@getUsedCategories');
     Route::get('getFiltered', 'ExpenseController@getFiltered');
     
