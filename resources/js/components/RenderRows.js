@@ -21,7 +21,7 @@ const RenderRows = (props) => {
                         <TableCell>{expense.purchased_at}</TableCell>
                         <TableCell>{expense.title}</TableCell>
                         <TableCell>&yen;{expense.money}</TableCell>
-                        <TableCell>{expense.categoryName}</TableCell>
+                        <TableCell>{expense.categoryname}</TableCell>
                         <TableCell align="center">
                             <Button color="primary">
                                 <Link to={'/edit/' + expense.id}><EditIcon /></Link>
