@@ -29,13 +29,14 @@ class ExpenseController extends Controller
         return $result;
     }
     
-    public function getCategoryCount()
+    public function getCategoryRatio()
     {
         $result = DB::table('expenses')
             ->join('categories', 'expenses.category_id', '=', 'categories.id')
-            ->selectRaw('categories.id, categories.name as name, count(*) as count')
+            ->selectRaw('categories.id, categories.name as name, sum(money) as money')
             ->groupBy('categories.id')
             ->get();
+        Log::debug($result);
         return $result;
     }
     
