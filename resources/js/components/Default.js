@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { axios } from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Header from './Header';
-import Home from './Home';
 import Dashboard from './Dashboard';
 import Create from './Create';
 import Edit from './Edit';
@@ -147,14 +146,12 @@ const Default = (props) => {
       <Header isAuthenticated={isAuthenticated} user={user} logout={logout}/>
       <Switch>
         {/* 未ログインでもアクセス可能 */}
-        <Route exact path="/" render={
-          (props) => <Home useStyles={useStyles} {...props}/> }  />
         <Route path="/signin" render={
           (props) => <SignIn authenticate={authenticate} isAuthenticated={isAuthenticated} setUser={setUser} {...props} />} />
         <Route path="/signup" component={SignUp} />
         
         {/* ログイン時のみアクセス可能 */}
-        <PrivateRoute exact path='/dashboard' component={Dashboard} isAuthenticated={isAuthenticated} token={token} authenticate={authenticate} useStyles={useStyles} />
+        <PrivateRoute exact path='/' component={Dashboard} isAuthenticated={isAuthenticated} token={token} authenticate={authenticate} useStyles={useStyles} />
         <PrivateRoute path="/list" component={List} isAuthenticated={isAuthenticated} token={token} authenticate={authenticate} useStyles={useStyles} />
         <PrivateRoute path="/create" component={Create} isAuthenticated={isAuthenticated} token={token} useStyles={useStyles} />
         <PrivateRoute path="/edit/:id" component={Edit} isAuthenticated={isAuthenticated} token={token} useStyles={useStyles} />

@@ -27,7 +27,7 @@ const Header = (props) => {
         <AppBar position="static">
             <Toolbar>
                 <Button color="inherit">
-                    <Link to="/dashboard">Home</Link>
+                    <Link to="/">Home</Link>
                 </Button>
                 <Button color="inherit">
                     <Link to="/list">List</Link>
