@@ -45,7 +45,7 @@ const Header = (props) => {
                         <Link to="/signin">Login</Link>
                     </Button>
                 }
-                <h2>{props.user}</h2>
+                {/* <h2>{props.user}</h2> */}
             </Toolbar>
         </AppBar>
   );
