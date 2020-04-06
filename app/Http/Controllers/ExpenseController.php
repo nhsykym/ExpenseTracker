@@ -25,6 +25,7 @@ class ExpenseController extends Controller
         $result = DB::table('expenses')
             ->selectRaw('purchased_at, sum(money) as money')
             ->groupBy('purchased_at')
+            ->orderBy('purchased_at', 'asc')
             ->get();
         return $result;
     }
