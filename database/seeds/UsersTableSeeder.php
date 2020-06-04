@@ -9,18 +9,18 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        DB::table('users')->insert([
-            'name' => 'Taro',
-            'email' => Str::random(5) . '@examplecom',
-            'password' => Str::random(5),
-        ]);
+    // public function run()
+    // {
+    //     DB::table('users')->insert([
+    //         'name' => 'Taro',
+    //         'email' => Str::random(5) . '@examplecom',
+    //         'password' => Str::random(5),
+    //     ]);
         
-        DB::table('users')->insert([
-            'name' => 'Hanako',
-            'email' => Str::random(5) . '@examplecom',
-            'password' => Str::random(5),
-        ]);
-    }
+    //     DB::table('users')->insert([
+    //         'name' => 'Hanako',
+    //         'email' => Str::random(5) . '@examplecom',
+    //         'password' => Str::random(5),
+    //     ]);
+    // }
 }
