@@ -7,14 +7,17 @@ use App\Expense;
 use App\Category;
 use Log;
 use DB;
+use JWTAuth;
 
 class ExpenseController extends Controller
 {
     public function getExpenses(Request $request)
     {
+        $current_user = JWTAuth::user();
         $result = DB::table('expenses')
             ->join('categories', 'expenses.category_id', '=', 'categories.id')
             ->selectRaw('expenses.id, expenses.purchased_at, expenses.title, expenses.money, categories.name as categoryname')
+            ->where('user_id', $current_user->id)
             ->orderBy('purchased_at', 'DESC')
             ->get();
         return $result;
@@ -22,8 +25,10 @@ class ExpenseController extends Controller
     
     public function getChartData()
     {
+        $current_user = JWTAuth::user();
         $result = DB::table('expenses')
             ->selectRaw('purchased_at, sum(money) as money')
+            ->where('user_id', $current_user->id)
             ->groupBy('purchased_at')
             ->orderBy('purchased_at', 'asc')
             ->get();
@@ -32,9 +37,11 @@ class ExpenseController extends Controller
     
     public function getCategoryRatio()
     {
+        $current_user = JWTAuth::user();
         $result = DB::table('expenses')
             ->join('categories', 'expenses.category_id', '=', 'categories.id')
             ->selectRaw('categories.id, categories.name as name, sum(money) as money')
+            ->where('user_id', $current_user->id)
             ->groupBy('categories.id')
             ->orderBy('categories.id')
             ->get();
@@ -44,9 +51,11 @@ class ExpenseController extends Controller
     
     public function getUsedCategories()
     {
+        $current_user = JWTAuth::user();
         $categories = DB::table('expenses')
                         ->join('categories', 'expenses.category_id', '=', 'categories.id')
                         ->select('categories.id', 'categories.name')
+                        ->where('user_id', $current_user->id)
                         ->distinct()
                         ->get();
         return $categories;
@@ -63,8 +72,9 @@ class ExpenseController extends Controller
         $category = $request->category;
         $moneyFrom = $request->moneyFrom;
         $moneyTo = $request->moneyTo;
+        $current_user = JWTAuth::user();
         
-        $query = DB::table('expenses');
+        $query = DB::table('expenses')->where('user_id', $current_user->id);
         
         //年月で絞り込み
         if(isset($yearMonth)) {
