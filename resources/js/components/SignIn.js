@@ -86,7 +86,7 @@ const SignIn = (props) => {
             );
           } else if(props.isAuthenticated && props.location.state === undefined) {
             return (
-              <Redirect to={'/dashboard'} />
+              <Redirect to={'/'} />
             );
           } else {
             return (
