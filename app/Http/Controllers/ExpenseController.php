@@ -38,18 +38,12 @@ class ExpenseController extends Controller
     public function getCategoryRatio()
     {
         $current_user = JWTAuth::user();
-        // $result = DB::table('expenses')
-        //     ->join('categories', 'expenses.category_id', '=', 'categories.id')
-        //     ->selectRaw('categories.id, categories.name as name, sum(money) as money')
-        //     ->where('user_id', $current_user->id)
-        //     ->groupBy('categories.id')
-        //     ->orderBy('categories.id')
-        //     ->get();
         $result = DB::table('expenses')
             ->join('categories', 'expenses.category_id', '=', 'categories.id')
-            ->selectRaw('expenses.id, expenses.purchased_at, expenses.title, expenses.money, categories.name as categoryname')
+            ->selectRaw('categories.id, categories.name as name, sum(money) as money')
             ->where('user_id', $current_user->id)
-            ->orderBy('purchased_at', 'DESC')
+            ->groupBy('categories.id', 'categories.name')
+            ->orderBy('categories.id')
             ->get();
         return $result;
     }
