@@ -45,7 +45,6 @@ class ExpenseController extends Controller
             ->groupBy('categories.id')
             ->orderBy('categories.id')
             ->get();
-        Log::debug($result);
         return $result;
     }
     
