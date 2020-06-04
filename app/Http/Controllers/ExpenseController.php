@@ -42,7 +42,7 @@ class ExpenseController extends Controller
             ->join('categories', 'expenses.category_id', '=', 'categories.id')
             ->selectRaw('categories.id, categories.name as name, sum(money) as money')
             ->where('user_id', $current_user->id)
-            ->groupBy('categories.id')
+            ->groupBy('categories.id', 'categories.name')
             ->orderBy('categories.id')
             ->get();
         return $result;
