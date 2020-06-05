@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+  import React, { useState, useEffect } from 'react';
 import { withRouter} from 'react-router-dom';
 import axios from 'axios';
 import Container from '@material-ui/core/Container';
@@ -45,9 +45,6 @@ const Edit = (props) => {
   
   const handleInputChange = (e) => {
     switch(e.target.name) {
-      case 'purchased_at':
-        setPurchased_at(formatDate(e.target.value));
-        break;
       case 'title':
         setTitle(e.target.value);
         break;
@@ -57,6 +54,10 @@ const Edit = (props) => {
       default:
         break;
     }
+  };
+
+  const handleDateChange = (date) => {
+    setPurchased_at(formatDate(date));
   };
   
   const handleCategoryChange = (event) => {
@@ -153,7 +154,7 @@ const Edit = (props) => {
                     id="date-picker-inline"
                     label="年月を入力"
                     value={purchased_at}
-                    onChange={handleInputChange}
+                    onChange={handleDateChange}
                   />
                   </MuiPickersUtilsProvider>
                 </Box>
