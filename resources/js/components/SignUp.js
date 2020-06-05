@@ -49,7 +49,7 @@ const SignUp = (props) => {
     axios
       .post('/api/signup', data)
       .then(res => {
-        props.history.push("/list");
+        props.history.push("/signin");
       })
       .catch(error => {
         console.log(error);
@@ -130,7 +130,6 @@ const SignUp = (props) => {
               {/* エラー時に表示 */}
               { error !== '' ? <p className="text-danger">{error}</p> : null}
               <Button
-                type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
