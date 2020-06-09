@@ -44,7 +44,7 @@ const List = (props) => {
                         </Paper>
                     </Grid>
                     <Grid item xs={12}>
-                        <Paper className={fixedHeightPaper}>
+                        <Paper className={classes.paper}>
                             <Expenses header="収支の一覧" expenses={expenses} updateTable={updateTable}/>
                         </Paper>
                     </Grid>
