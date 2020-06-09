@@ -124,12 +124,12 @@ class ExpenseController extends Controller
     
     public function editExpense(Request $request, $expense_id)
     {
+        $current_user = JWTAuth::user();
         $expense = Expense::find($expense_id);
         $expense->purchased_at = $request->purchased_at;
         $expense->title = $request->title;
         $expense->money = $request->money;
-        $expense->category_id = 1;
-        $expense->user_id = 1;
+        $expense->category_id = $request->category;
         $expense->save();
         return;
     }
